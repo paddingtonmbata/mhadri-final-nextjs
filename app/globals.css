@@ -1,27 +1,94 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Eric Meyer Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
 }
 
+/* Body and typography adjustments */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove the default border and outline styles */
+button, input, select, textarea {
+  margin: 0;
+  border: 0;
+  outline: 0;
+}
+
+/* Import Tailwind CSS */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+html {
+  width: 100vw;
+}
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  color: black;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+#map, #filtermap {
+  width: 100%;
+  aspect-ratio: 865.5 / 500;
+}
+#filtermap {
+  width: 65%;
+  aspect-ratio: 865.5 / 500;
+}
+
+#bargraph {
+  width: 100%;
+  aspect-ratio: 865.5 / 450;
+  margin-top: -12px;
+  max-height: 475px;
+}
+
+#map svg, #filtermap svg {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.jvectormap-container {
+  width: 100%;
+  height: 90%;
+  margin-top: 5%;
 }
