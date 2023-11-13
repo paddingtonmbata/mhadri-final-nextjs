@@ -3,31 +3,58 @@ import { useCourses } from "./courses";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
+import * as XLSX from "xlsx";
+import { saveAs } from 'file-saver';
+
 function toDate(date) {
-    console.log(date)
-    const formattedDate = date.replace('Z', '');
-    const originalDate = new Date(formattedDate);
-  
-    // Format the date
-    const formattedDateString = originalDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  
-    return formattedDateString;
-  
+  console.log(date)
+  const formattedDate = date.replace('Z', '');
+  const originalDate = new Date(formattedDate);
+
+  // Format the date
+  const formattedDateString = originalDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  return formattedDateString;  
+}
+
+function convertToXLSX(data) {
+  try {
+    const ws = XLSX.utils.json_to_sheet(data);
+    console.log("ws: ", ws);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    console.log("excel buffer: ", excelBuffer);
+    return excelBuffer;
+  } catch (error) {
+    console.log("Error downloading xslx", error);
   }
-  
+}
+
+function downloadExcelFile(buffer, fileName) {
+  const data = new Blob([buffer], { type: 'application/octet-stream' });
+  saveAs(data, fileName);
+}
+
+
 
 
 const Courses = () => {
   const { courses } = useCourses();
+  const handleDownload = () => {
+    const excelBuffer = convertToXLSX(courses);
+    downloadExcelFile(excelBuffer, 'courses.xlsx');
+  };
 
   return (
     <>
     <div className="entries mt-8 w-full flex justify-center">
         <p>{courses.length ? courses.length : "No"} course{courses.length > 1 ? "s": ""} found</p>
+        {courses ? <button onClick={handleDownload}>Download as XLSX</button>: <button >No Courses to download</button>}
       </div>
     <div className="courses w-full p-12 flex flex-wrap justify-evenly">
       
