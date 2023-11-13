@@ -92,10 +92,10 @@ export function Filters() {
                 </div>
                 <br/>
                 <br/>                
-            <div className="filtermap-filtercolumn w-full flex flex-col lg:flex-row justify-center">
+            <div className="filtermap-filtercolumn w-full flex flex-col sm:flex-row justify-center">
                 <div id="filtermap" className=""></div>
                 <div className="filterby-reset p-5 flex flex-col justify-start w-96">
-                    <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full border-solid border" >
+                    <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
                         <h2 className="text-pg-title font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-3 px-8">Filter By</h2>
                         <ul className="filters p-4">
                             <li className="filter my-4">

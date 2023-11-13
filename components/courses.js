@@ -15,8 +15,7 @@ export const CoursesProvider = ({ children }) => {
       try {
         const response = await fetch('/api/courses_data');
         const data = await response.json();
-        setCourses(data.data);
-        console.log("data from courses data: ", data.data);
+        setCourses(data.data.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -35,7 +34,3 @@ export const CoursesProvider = ({ children }) => {
 export const useCourses = () => {
   return useContext(CoursesContext);
 };
-// Create the Courses component
-
-
-
