@@ -30,14 +30,13 @@ function createBarGraph(data) {
       events: {
         // when each point of the bargraoh is clicked on it renders courses belonging to the clicked country on the bargraph
         dataPointSelection: async function (event, chartContext, config) {
-          // const country_name = config.w.config.xaxis.categories[config.dataPointIndex];
-          // console.log(country_name)
-          // // Fetch and render courses for the clicked category
-          // const courseResponse = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/country_by_name/${country_name}`);
-          // const countryCourses = await courseResponse.json();
-          // const coursesContainer = $('.courses');
-          // coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
-          // renderCourses(countryCourses); // Implement the renderCourses function to display courses  
+          const country_name = config.w.config.xaxis.categories[config.dataPointIndex];
+          // Fetch and render courses for the clicked category
+          const courseResponse = await fetch(`/api/country_by_name/${country_name}`);
+          const countryCourses = await courseResponse.json();
+          const coursesContainer = $('.courses');
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+          renderCourses(countryCourses); // Implement the renderCourses function to display courses  
                     
         }
       }

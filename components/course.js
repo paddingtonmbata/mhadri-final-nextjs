@@ -40,9 +40,6 @@ function downloadExcelFile(buffer, fileName) {
   saveAs(data, fileName);
 }
 
-
-
-
 const Courses = () => {
   const { courses } = useCourses();
   const handleDownload = () => {
@@ -52,9 +49,9 @@ const Courses = () => {
 
   return (
     <>
-    <div className="entries mt-8 w-full flex justify-center">
+    <div className="entries mt-8 w-full flex flex-row justify-center items-center">
         <p>{courses.length ? courses.length : "No"} course{courses.length > 1 ? "s": ""} found</p>
-        {courses ? <button onClick={handleDownload}>Download as XLSX</button>: <button >No Courses to download</button>}
+        {courses ? <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" onClick={handleDownload}>Download as XLSX</button>: <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" >No Courses to download</button>}
       </div>
     <div className="courses w-full p-12 flex flex-wrap justify-evenly">
       

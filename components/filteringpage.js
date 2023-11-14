@@ -9,7 +9,9 @@ import "../public/js/jquery-jvectormap-world-mill";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const createFilterMap = (id) => {
+import { useCourses } from "./courses";
+
+const createFilterMap = (id, updateCourses) => {
     // var selectedRegion = null;
     // var originalFillColors = {};
     const mapObject = $(id).vectorMap({
@@ -32,53 +34,36 @@ const createFilterMap = (id) => {
           fill: 'white'
         }
       },
-      onRegionClick: async function(event, code) {
-        // //logic to show the selected country
-        // if (selectedRegion) {
-        //   var prevRegionElement = $(id).find(`[data-code="${selectedRegion}"]`);
-        //   prevRegionElement.css('fill', originalFillColors[selectedRegion]);
-        // }
-
-        // // Toggle the highlighting state for the clicked region
-        // if (selectedRegion !== code) {
-        //     selectedRegion = code;
-        //     var currentRegionElement = $(id).find(`[data-code="${selectedRegion}"]`);
-        //     // Store the original fill color before changing it
-        //     originalFillColors[selectedRegion] = currentRegionElement.css('fill');
-        //     currentRegionElement.css('fill', 'rgb(0, 143, 255)'); // Change to your desired highlight color
-        // } else {
-        //     selectedRegion = null; // Reset the selected region
-        // } 
-        // // Fetch and display courses from the clicked country
-        // try {
-        //   // Remove the previously highlighted region
-        //   $('.jvectormap-region.active').removeClass('active');
-          
-        //   // Add the active class to the clicked region
-        //   //$(event.target).addClass('active');
-
-        //   const courseResponse = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/courses_by_country/${code}`);
-        //   const data = await courseResponse.json();
-        //   renderCourses(data, true)         
-
-        // } catch (error) {
-        //   console.error(`Error fetching course data: ${error}`);
-        // }
-      }
+      onRegionClick: async function (event, code) {
+        try {
+          const courseResponse = await fetch(`/api/courses_by_country/${code}`);
+          const data = await courseResponse.json();
+          updateCourses(data.data.data);
+        } catch (error) {
+          console.error(`Error fetching course data: ${error}`);
+        }
+      },
     });
   }
 
 export function Filters() {
+
+    const {setCourses} = useCourses();
+
     useEffect(()=> {
+
+        const updateCourses = (data) => {
+            setCourses(data);
+        }
         const id = "#filtermap";
 
         try {
-            createFilterMap(id);
+            createFilterMap(id, updateCourses);
             console.log('Succesfully created filter map');
         } catch (error) {
             console.log('Error with filtermap: ', error);
         }
-    }, []);
+    }, [setCourses]);
     return (
         <div className="filtering_page">
             <div className="filtering-page-header py-5 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
