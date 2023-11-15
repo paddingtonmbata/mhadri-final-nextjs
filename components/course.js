@@ -7,7 +7,6 @@ import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver';
 
 function toDate(date) {
-  console.log(date)
   const formattedDate = date.replace('Z', '');
   const originalDate = new Date(formattedDate);
 
@@ -44,7 +43,7 @@ const Courses = () => {
   const { courses } = useCourses();
   const handleDownload = () => {
     const excelBuffer = convertToXLSX(courses);
-    downloadExcelFile(excelBuffer, 'courses.xlsx');
+    downloadExcelFile(excelBuffer, `courses_${courses.length}.xlsx`);
   };
 
   return (
@@ -53,7 +52,7 @@ const Courses = () => {
         <p>{courses.length ? courses.length : "No"} course{courses.length > 1 ? "s": ""} found</p>
         {courses ? <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" onClick={handleDownload}>Download as XLSX</button>: <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" >No Courses to download</button>}
       </div>
-    <div className="courses w-full p-12 flex flex-wrap justify-evenly">
+    <div id="courses" className="courses w-full p-12 flex flex-wrap justify-evenly">
       
       {courses.map((course) => (
         <div key={course.id} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" style={{boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)"}}>

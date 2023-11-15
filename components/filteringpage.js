@@ -60,6 +60,8 @@ export function Filters() {
         try {
             createFilterMap(id, updateCourses);
             console.log('Succesfully created filter map');
+            const coursesContainer = document.getElementById("courses");
+            coursesContainer.scrollIntoView({ behavior: "smooth"});
         } catch (error) {
             console.log('Error with filtermap: ', error);
         }

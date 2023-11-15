@@ -180,7 +180,7 @@ async function createPieChart (chartId, data, chartType, legend_height, pieColor
             enabled: true,
             color: pieColor,
             shadeTo: 'dark',
-            shadeIntensity: 0.9,
+            shadeIntensity: 0.5,
         },
     },
     chart: {
@@ -188,65 +188,7 @@ async function createPieChart (chartId, data, chartType, legend_height, pieColor
       height: '369px',
       events: {
         // clicking on the piechart will render courses with that specific filter indicated by the piechart
-          dataPointSelection: async function (event, chartContext, config) {
-            // checks if the clicked piechart is alreadu filtered by country or not
-              // if (code) {
-              //   // Check if the clicked element is a pie slice
-              //   if (config.w.config.chart.type === 'donut') {
-              //     // Extract the category from the clicked slice
-              //     const category = config.w.config.labels[config.dataPointIndex];
-
-              //     // Fetch and render courses for the clicked category
-              //     const courseResponse = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/courses_by_category_code/${code}/${category}`);
-              //     const categoryCourses = await courseResponse.json();
-              //     const coursesContainer = $('.courses');
-              //     coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
-              //     renderCourses(categoryCourses); // Implement the renderCourses function to display courses
-              //     // Logic to fetch and render courses based on the selected filter
-              //     // Click event listener for Teaching Mechanisms filter
-              //     $('.filters').on('click', '.expanded-filter li', async function() {
-              //       const filter = $(this).text().split(' ')[0]; // Extract the filter value
-              //       console.log(`filter: ${filter}`);
-              //       const categoryCourses = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/courses_by_category_code/${code}/${filter}`);
-              //       const categoryCoursesResponse = await categoryCourses.json();
-              //       console.log(`categoryCourses: ${JSON.stringify(categoryCoursesResponse)}`);
-              //       coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
-              //       renderCourses(categoryCoursesResponse, false);
-              //     });
-                
-              //     console.log('finished applying events');                     
-              //   }
-              // } else {
-              //   if (config.w.config.chart.type === 'donut') {
-              //     // Extract the category from the clicked slice
-              //     const category = config.w.config.labels[config.dataPointIndex];
-
-              //     // Fetch and render courses for the clicked category
-              //     const courseResponse = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/courses_by_category/${category}`);
-              //     const categoryCourses = await courseResponse.json();
-              //     const coursesContainer = $('.courses');
-              //     coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
-              //     renderCourses(categoryCourses); // Implement the renderCourses function to display courses
-
-              //     // Logic to fetch and render courses based on the selected filter
-              //     // Click event listener for Teaching Mechanisms filter
-              //     console.log('applying events');
-                
-              //     // Event delegation for all filter lists
-              //     $('.filters').on('click', '.expanded-filter li', async function() {
-              //       const filter = $(this).text().split(' ')[0]; // Extract the filter value
-              //       console.log(`filter: ${filter}`);
-              //       const categoryCourses = await fetch(`https://mhadri-test-site-bdfa87d23e0b.herokuapp.com/api/courses_by_category/${filter}`);
-              //       const categoryCoursesResponse = await categoryCourses.json();
-              //       console.log(`categoryCourses: ${JSON.stringify(categoryCoursesResponse)}`);
-              //       coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
-              //       renderCourses(categoryCoursesResponse, false);
-              //     });
-                
-              //     console.log('finished applying events');
-              //   }
-              // }
-          },
+          dataPointSelection: async function (event, chartContext, config) { },
       },
     },
   }
@@ -265,7 +207,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         const id = "#map";
-        const barId = "#bargraph"
+        const barId = "#bargraph";
         const pieOne = "#piechart1";
         const pieTwo = "#piechart2";
 
@@ -296,7 +238,7 @@ export default function Dashboard() {
           try {
             const response = await fetch('/api/teaching_mechanism_counts');
             const data = await response.json();
-            createPieChart(pieOne, data.data, 'donut', 200, '#0071A4', 'Teaching mechanisms', false);
+            createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
             console.log(pieOne, " created");
             console.log(pieOne, data.data);
           } catch (error) {
@@ -308,7 +250,7 @@ export default function Dashboard() {
           try {
             const response = await fetch('/api/types_of_course_counts');
             const data = await response.json();
-            createPieChart(pieTwo, data.data, 'donut', 200, '#727272', 'Type of Course', false);
+            createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
             console.log(pieTwo, " created");
             console.log(pieTwo, data.data);
           } catch (error) {
