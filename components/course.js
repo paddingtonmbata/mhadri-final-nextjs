@@ -6,6 +6,8 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver';
 
+import { useState } from "react";
+
 function toDate(date) {
   const formattedDate = date.replace('Z', '');
   const originalDate = new Date(formattedDate);
@@ -18,6 +20,25 @@ function toDate(date) {
   });
 
   return formattedDateString;  
+}
+
+function generateExcelData(courses) {
+  return courses.map(course => ({
+    source: course.source,
+    institution_name: course.institution_name,
+    institution_location: course.institution_location,
+    scope: course.scope,
+    type_of_course: course.type_of_course,
+    teaching_mechanism: course.teaching_mechanism,
+    target_population: course.target_population,
+    objective_of_training: course.objective_of_training,
+    thematic_focus: course.thematic_focus,
+    teaching_approach: course.teaching_approach,
+    frequency_of_training: course.frequency_of_training,
+    funding_schemes: course.funding_schemes,
+    sustainibility_factors: course.sustainibility_factors,
+    key_challenges: course.key_challenges
+  }));
 }
 
 function convertToXLSX(data) {
@@ -41,8 +62,18 @@ function downloadExcelFile(buffer, fileName) {
 
 const Courses = () => {
   const { courses } = useCourses();
+
+  const [expandedCourses, setExpandedCourses] = useState({});
+
+  const toggleExpanded = (courseId) => {
+    setExpandedCourses((prevExpandedCourses) => ({
+      ...prevExpandedCourses,
+      [courseId]: !prevExpandedCourses[courseId],
+    }));
+  };
+
   const handleDownload = () => {
-    const excelBuffer = convertToXLSX(courses);
+    const excelBuffer = convertToXLSX(generateExcelData(courses));
     downloadExcelFile(excelBuffer, `courses_${courses.length}.xlsx`);
   };
 
@@ -50,12 +81,12 @@ const Courses = () => {
     <>
     <div className="entries mt-8 w-full flex flex-row justify-center items-center">
         <p>{courses.length ? courses.length : "No"} course{courses.length > 1 ? "s": ""} found</p>
-        {courses ? <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" onClick={handleDownload}>Download as XLSX</button>: <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" >No Courses to download</button>}
+        {courses ? <button className="bg-blue-500 font-bold text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" onClick={handleDownload}>Download as XLSX</button>: <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" >No Courses to download</button>}
       </div>
     <div id="courses" className="courses w-full p-12 flex flex-wrap justify-evenly">
       
       {courses.map((course) => (
-        <div key={course.id} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" style={{boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)"}}>
+        <div key={course.id} style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)",width: expandedCourses[course.id] ? "100%": '', transition: 'width 0.5s ease-in-out'}} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" >
           <div className="course-title-container">
             <h3>
               <strong>
@@ -76,7 +107,7 @@ const Courses = () => {
                 <strong> Teaching mechanism: </strong>{" "}
                 {course.teaching_mechanism}
               </p>
-              <div className="hidden">
+              <div className={`${expandedCourses[course.id] ? '' : 'hidden'}`}>
                 <p>
                     <strong> Target population: </strong> {course.target_population}
                 </p>
@@ -89,7 +120,7 @@ const Courses = () => {
                 </p>
               </div>
             </div>
-            <div className="col-2 hidden">
+            <div className={`col-2 ${expandedCourses[course.id] ? '' : 'hidden'}`}>
               <p>
                 <strong> Teaching approach: </strong> {course.teaching_approach}
               </p>
@@ -118,6 +149,9 @@ const Courses = () => {
           <div className="footnotes">
             <p className="created text-sm text-gray-700">{toDate(course.created_at)}</p>
           </div>
+          <button id="expand-button" onClick={() => toggleExpanded(course.id)} className="bg-blue-500 text-white px-4 py-2 rounded-br-2xl rounded-tl-2xl hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 absolute bottom-0 right-0">
+          {expandedCourses[course.id] ? 'Read less' : 'Read more'}
+          </button>
         </div>
       ))}
       ;
@@ -126,3 +160,4 @@ const Courses = () => {
   );
 };
 export default Courses;
+
