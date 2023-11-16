@@ -38,7 +38,9 @@ function createBarGraph(data, updateCourses) {
           const countryCourses = await courseResponse.json();
           const coursesContainer = $('.courses');
           updateCourses(countryCourses.data);
-          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});                    
+          setTimeout(()=>{
+            coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+          }, 200);                  
         }
       }
     },

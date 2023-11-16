@@ -40,7 +40,9 @@ const createFilterMap = (id, updateCourses) => {
           const data = await courseResponse.json();
           updateCourses(data.data.data);
           const coursesContainer = $('.courses');
-          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+          setTimeout(()=>{
+            coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+          }, 200); 
         } catch (error) {
           console.error(`Error fetching course data: ${error}`);
         }

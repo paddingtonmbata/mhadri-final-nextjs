@@ -74,7 +74,9 @@ const Courses = () => {
       [courseId]: !prevExpandedCourses[courseId],
     }));
     const courseContainer = courseRefs[courseId];
-    courseContainer.scrollIntoView({ behavior: 'smooth'});
+    setTimeout(()=>{
+      courseContainer.scrollIntoView({ behavior: 'smooth'});
+    }, 200);    
   };
 
   const handleDownload = () => {
