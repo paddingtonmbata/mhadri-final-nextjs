@@ -6,7 +6,9 @@ import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
 
-function createBarGraph(data) {
+import { useCourses } from "./courses";
+
+function createBarGraph(data, updateCourses) {
   const categories = data.map(item => item.country_name);
   const courseCounts = data.map(item => item.course_count);
 
@@ -35,9 +37,8 @@ function createBarGraph(data) {
           const courseResponse = await fetch(`/api/country_by_name/${country_name}`);
           const countryCourses = await courseResponse.json();
           const coursesContainer = $('.courses');
-          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
-          renderCourses(countryCourses); // Implement the renderCourses function to display courses  
-                    
+          updateCourses(countryCourses.data);
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});                    
         }
       }
     },
@@ -204,67 +205,69 @@ async function createPieChart (chartId, data, chartType, legend_height, pieColor
 }
 
 export default function Dashboard() {
+  const {setCourses} = useCourses();
+  const updateCourses = (data) => {
+    setCourses(data);
+  }
 
-    useEffect(() => {
-        const id = "#map";
-        const barId = "#bargraph";
-        const pieOne = "#piechart1";
-        const pieTwo = "#piechart2";
+  useEffect(() => {
+      const id = "#map";
+      const barId = "#bargraph";
+      const pieOne = "#piechart1";
+      const pieTwo = "#piechart2";
 
-        const fetchBarData = async () => {
-          try {
-            const response = await fetch('/api/country_course_count');
-            const data = await response.json();
-            console.log("bar data response: ", data.data);
-            createBarGraph(data.data);
-            console.log("Bar graph created");
-          } catch (error) {
-            console.log("Error fetching bar data: ", error)
-          }
+      const fetchBarData = async () => {
+        try {
+          const response = await fetch('/api/country_course_count');
+          const data = await response.json();
+          console.log("bar data response: ", data.data);
+          createBarGraph(data.data, updateCourses);
+          console.log("Bar graph created");
+        } catch (error) {
+          console.log("Error fetching bar data: ", error)
         }
-        
-        const fetchData = async () => {
-          try {
-            const response = await fetch('/api/country_chloropleth');
-            const data = await response.json();
-            createMap(id, data.data);
-            console.log("Map created");
-          } catch (error) {
-            console.error('Error fetching map data:', error);
-          }
-        };
-
-        const fetchPieOneData = async () => {
-          try {
-            const response = await fetch('/api/teaching_mechanism_counts');
-            const data = await response.json();
-            createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
-            console.log(pieOne, " created");
-            console.log(pieOne, data.data);
-          } catch (error) {
-            console.error('Error fetching pieOne data: ', error);
-          }
-        };
-
-        const fetchPieTwoData = async () => {
-          try {
-            const response = await fetch('/api/types_of_course_counts');
-            const data = await response.json();
-            createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
-            console.log(pieTwo, " created");
-            console.log(pieTwo, data.data);
-          } catch (error) {
-            console.error('Error fetching pieTwo data: ', error);
-          }
-        };
+      }
       
-        fetchData();
-        fetchBarData();
-        fetchPieOneData();
-        fetchPieTwoData();
-      }, []);   
-      console.log("after use effect")  ; 
+      const fetchData = async () => {
+        try {
+          const response = await fetch('/api/country_chloropleth');
+          const data = await response.json();
+          createMap(id, data.data);
+          console.log("Map created");
+        } catch (error) {
+          console.error('Error fetching map data:', error);
+        }
+      };
 
+      const fetchPieOneData = async () => {
+        try {
+          const response = await fetch('/api/teaching_mechanism_counts');
+          const data = await response.json();
+          createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
+          console.log(pieOne, " created");
+          console.log(pieOne, data.data);
+        } catch (error) {
+          console.error('Error fetching pieOne data: ', error);
+        }
+      };
+
+      const fetchPieTwoData = async () => {
+        try {
+          const response = await fetch('/api/types_of_course_counts');
+          const data = await response.json();
+          createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
+          console.log(pieTwo, " created");
+          console.log(pieTwo, data.data);
+        } catch (error) {
+          console.error('Error fetching pieTwo data: ', error);
+        }
+      };
+    
+      fetchData();
+      fetchBarData();
+      fetchPieOneData();
+      fetchPieTwoData();
+    }, []);
     return (
         <div id="stats_page_wrapper" className="p-4 w-full flex justify-center items-center">
             <div id="stats_page_card" className="w-11/12 p-6 rounded-lg self-center" style={{boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)"}}>
@@ -293,6 +296,5 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
-
-    );
+      );
 }

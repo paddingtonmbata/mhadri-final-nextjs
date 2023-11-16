@@ -7,7 +7,7 @@ import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import { useCourses } from "./courses";
 
@@ -115,6 +115,11 @@ export function Filters() {
                             </li>
                             <li className="filter my-4">
                                 <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Thematic focus</span>
+                                <ul className="expanded-filter ef-thematic">
+                                </ul>
+                            </li>
+                            <li className="filter my-4">
+                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Institution offering the course</span>
                                 <ul className="expanded-filter ef-thematic">
                                 </ul>
                             </li>
