@@ -3,10 +3,12 @@ import { useCourses } from "./courses";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
+import $ from "jquery";
+
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver';
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function toDate(date) {
   const formattedDate = date.replace('Z', '');
@@ -62,6 +64,7 @@ function downloadExcelFile(buffer, fileName) {
 
 const Courses = () => {
   const { courses } = useCourses();
+  const courseRefs = {};
 
   const [expandedCourses, setExpandedCourses] = useState({});
 
@@ -70,6 +73,8 @@ const Courses = () => {
       ...prevExpandedCourses,
       [courseId]: !prevExpandedCourses[courseId],
     }));
+    const courseContainer = courseRefs[courseId];
+    courseContainer.scrollIntoView({ behavior: 'smooth'});
   };
 
   const handleDownload = () => {
@@ -86,7 +91,12 @@ const Courses = () => {
     <div id="courses" className="courses w-full p-12 flex flex-wrap justify-evenly">
       
       {courses.map((course) => (
-        <div key={course.id} style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)",width: expandedCourses[course.id] ? "100%": '', transition: 'width 0.5s ease-in-out'}} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" >
+        <div 
+          key={course.id} 
+          ref={(element) => {
+            courseRefs[course.id] = element;
+          }}
+          id={course.id} style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)",width: expandedCourses[course.id] ? "100%": '', transition: 'width 0.5s ease-in-out'}} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" >
           <div className="course-title-container">
             <h3>
               <strong>

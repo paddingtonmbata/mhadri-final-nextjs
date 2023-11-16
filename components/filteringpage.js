@@ -39,6 +39,8 @@ const createFilterMap = (id, updateCourses) => {
           const courseResponse = await fetch(`/api/courses_by_country/${code}`);
           const data = await courseResponse.json();
           updateCourses(data.data.data);
+          const coursesContainer = $('.courses');
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
         } catch (error) {
           console.error(`Error fetching course data: ${error}`);
         }
@@ -49,13 +51,24 @@ const createFilterMap = (id, updateCourses) => {
 export function Filters() {
 
     const {setCourses} = useCourses();
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch('/api/courses_data');
+        const data = await response.json();
+        setCourses(data.data.data);
+        const coursesContainer = $('.courses');
+        coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
 
     useEffect(()=> {
 
         const updateCourses = (data) => {
             setCourses(data);
         }
-        const id = "#filtermap";
+        const id = "#filtermap";        
 
         try {
             createFilterMap(id, updateCourses);
@@ -112,7 +125,7 @@ export function Filters() {
                         <button name="search_submit" type="submit" className="rounded-xl py-3 px-4 ml-1 bg-gray-900 text-white font-bold"><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
                     </form>
                     <div className="reset-filter-page self-center">
-                        <button id="reset_filter_button" className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 font-bold mt-3"> Reset all filters</button>
+                        <button onClick={fetchCourses} id="reset_filter_button" className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 font-bold mt-3"> Reset all filters</button>
                     </div>
                 </div>
                 
