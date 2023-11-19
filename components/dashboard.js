@@ -28,6 +28,7 @@ function createBarGraph(data, updateCourses) {
     chart: {
       type: 'bar', 
       height: 500, 
+      width: '100%',
       fontFamily: 'Heebo, monospace',
       events: {
         // when each point of the bargraoh is clicked on it renders courses belonging to the clicked country on the bargraph
@@ -276,12 +277,12 @@ export default function Dashboard() {
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="">
-                      <h2 className="text-gray-900 text-title font-bold">Number of courses/trainings offered per country</h2>
+                      <h2 className="text-gray-900 text-title font-bold text-center">Number of courses/trainings offered per country</h2>
                       <div id="map" className="rounded-lg self-center">
                       </div>
                     </div>
                     
-                    <div id="bargraph" className="py-4">
+                    <div id="bargraph" className="py-4 self-center flex justify-center w-full">
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-6">

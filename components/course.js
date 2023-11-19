@@ -158,15 +158,14 @@ const Courses = () => {
               <strong> Scope: </strong>{course.scope}
             </p>
           </div>
-          <div className="footnotes">
-            <p className="created text-sm text-gray-700">{toDate(course.created_at)}</p>
+          <div className="footnotes p-2 absolute bottom-1 left-1">
+            <p className="created text-sm text-gray-500">{toDate(course.created_at)}</p>
           </div>
-          <button id="expand-button" onClick={() => toggleExpanded(course.id)} className="bg-blue-500 text-white px-4 py-2 rounded-br-2xl rounded-tl-2xl hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 absolute bottom-0 right-0">
+          <button id="expand-button" onClick={() => toggleExpanded(course.id)} className="bg-blue-500 font-bold text-white px-2 py-2 rounded-2xl hover:text-blue-600 hover:bg-white focus:outline-none focus:shadow-outline-blue active:bg-white active:text-blue-500 transition duration-150 absolute bottom-1 right-1 text-sm">
           {expandedCourses[course.id] ? 'Read less' : 'Read more'}
           </button>
         </div>
       ))}
-      ;
     </div>
     </>
   );

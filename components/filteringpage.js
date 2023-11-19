@@ -1,7 +1,7 @@
 "use client";
 
 import ApexCharts from "apexcharts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
@@ -59,12 +59,42 @@ export function Filters() {
         const data = await response.json();
         setCourses(data.data.data);
         const coursesContainer = $('.courses');
-        coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+        setTimeout(()=>{
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+        }, 200);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
-
+    const [searchTerm, setSearchTerm] = useState('');
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const apiUrl = `/api/course_data_search?search=${searchTerm}`;
+        const response = await fetch(apiUrl);
+  
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+          
+        }
+  
+        const data = await response.json();
+        // Handle the fetched data as needed
+        setCourses(data.data);
+        const coursesContainer = $('.courses');
+        setTimeout(()=>{
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+        }, 200);
+        setSearchTerm('');
+      } catch (error) {
+        console.log(error);
+        const coursesContainer = $('.courses');
+        setTimeout(()=>{
+          coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+        }, 200);
+      }
+    };
     useEffect(()=> {
 
         const updateCourses = (data) => {
@@ -84,7 +114,7 @@ export function Filters() {
     return (
         <div className="filtering_page">
             <div className="filtering-page-header py-5 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
-                    <h2 className="text-pg-header font-bold">Search Trainings/Courses</h2>
+                    <h2 className="text-pg-header font-bold" id="search-trainings">Search Trainings/Courses</h2>
                     <br/> <br/>
 
                     <p className="text-base font-medium">The courses are categorized by type, instititution location, teaching <br/> mechanism, target audience, and thematic focus. The map reflects the countries<br/> where the courses and trainings are implemented.</p>
@@ -94,12 +124,12 @@ export function Filters() {
                 </div>
                 <br/>
                 <br/>                
-            <div className="filtermap-filtercolumn w-full flex flex-col sm:flex-row justify-center">
+            <div className="filtermap-filtercolumn w-full flex flex-col md:flex-row justify-center items-center">
                 <div id="filtermap" className=""></div>
-                <div className="filterby-reset p-5 flex flex-col justify-start w-96">
+                <div className="filterby-reset p-5 flex flex-col justify-start w-96 lg:mt-8 md:mt-10">
                     <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
-                        <h2 className="text-pg-title font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-3 px-8">Filter By</h2>
-                        <ul className="filters p-4">
+                        <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
+                        <ul className="filters p-4 text-sm text-center md:text-left">
                             <li className="filter my-4">
                                 <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Type of Course</span>
                                 <ul className="expanded-filter ef-type">
@@ -127,8 +157,8 @@ export function Filters() {
                             </li>
                         </ul>
                     </div>
-                    <form className="search bg-white rounded-xl py-3 px-2 flex flex-row justify-center">
-                        <input type="text" name="searchbar" id="searchbar" className="p-3 rounded-xl" placeholder="Search courses..." />
+                    <form onSubmit={handleSubmit} id="search" className="bg-white rounded-xl py-3 px-2 flex flex-row justify-center">
+                      <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} name="searchbar" id="searchbar" className="p-3 rounded-xl" placeholder="Search courses..." />
                         <button name="search_submit" type="submit" className="rounded-xl py-3 px-4 ml-1 bg-gray-900 text-white font-bold"><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
                     </form>
                     <div className="reset-filter-page self-center">

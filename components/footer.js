@@ -13,7 +13,7 @@ export default function Footer() {
                 </div>
 
                 {/* <!-- Social Icons --> */}
-                <div className="flex flex-row items-right mr-24">
+                <div className="flex flex-row items-right mr-24" id="contact">
                     <a href="https://www.facebook.com/MigHealthDev/" className="mx-4">
                         <FontAwesomeIcon icon={faFacebook} style={{color: iconColor}}/>
                     </a>
