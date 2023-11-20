@@ -146,10 +146,10 @@ export function Filters() {
                 <div className="filterby-reset p-5 flex flex-col justify-start w-96 lg:mt-8 md:mt-10">
                     <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
                         <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
-                        <ul className="filters p-4 text-sm text-center md:text-left">
+                        <ul className="filters p-4 text-sm text-center md:text-left max-h-80 overflow-y-auto">
                             <li className="filter my-4">
                                 <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course</span>
-                                <ul className={`max-h-60 overflow-y-scroll ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
+                                <ul className={`max-h-60 overflow-y-auto ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
                                   {
                                     filters.typeofcourse && (
                                       filters.typeofcourse.labels.map((label, index) => (
@@ -163,7 +163,7 @@ export function Filters() {
                             </li>
                             <li className="filter my-4">
                                 <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus</span>
-                                <ul className={`max-h-60 overflow-y-scroll ${isThematicFocusExpanded ? "" : "hidden"}`}>
+                                <ul className={`max-h-60 overflow-y-auto ${isThematicFocusExpanded ? "" : "hidden"}`}>
                                   {
                                     filters.thematic && (
                                       filters.thematic.labels.map((label, index) => (
@@ -177,7 +177,7 @@ export function Filters() {
                             </li>
                             <li className="filter my-4">
                                 <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isInstitutionsExpanded? faAngleUp : faAngleDown} /> Institution offering the course</span>
-                                <ul className={`max-h-60 overflow-y-scroll ${isInstitutionsExpanded ? "" : "hidden"}`}>
+                                <ul className={`max-h-60 overflow-y-auto ${isInstitutionsExpanded ? "" : "hidden"}`}>
                                   {
                                     filters.institutions && (
                                       filters.institutions.labels.map((label, index) => (
