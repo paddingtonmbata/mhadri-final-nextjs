@@ -102,7 +102,7 @@ const Courses = () => {
           <div className="course-title-container">
             <h3>
               <strong>
-                <a href={course.source}>
+                <a href={course.source} target="_blank" rel="noopener noreferrer">
                   <FontAwesomeIcon icon={faLink} />
                 </a>{" "}
                 {course.institution_name}
