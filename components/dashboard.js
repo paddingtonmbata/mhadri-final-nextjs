@@ -93,7 +93,7 @@ function createBarGraph(data, updateCourses) {
   chart.render();
 }
 
-const createMap = (id, data) => {
+const createMap = (id, data, updateCourses) => {
     let mapData = {};
   
     // creates an object for the chloropleth effect on the map
@@ -140,9 +140,19 @@ const createMap = (id, data) => {
           el.html(countryName + ' - O');
         }
       },
-      onRegionClick: async function(event, code) {
-        console.log(`Clicked on: ${code}`);
-      }
+      onRegionClick: async function (event, code) {
+        try {
+          const courseResponse = await fetch(`/api/courses_by_country/${code}`);
+          const data = await courseResponse.json();
+          updateCourses(data.data.data);
+          // const coursesContainer = $('.courses');
+          // setTimeout(()=>{
+          //   coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
+          // }, 200); 
+        } catch (error) {
+          console.error(`Error fetching course data: ${error}`);
+        }
+      },
     });
 };
 
@@ -227,7 +237,7 @@ export default function Dashboard() {
           createBarGraph(data.data, updateCourses);
           console.log("Bar graph created");
         } catch (error) {
-          console.log("Error fetching bar data: ", error)
+          console.log("Error fetching bar data: ", error);
         }
       }
       
@@ -235,7 +245,7 @@ export default function Dashboard() {
         try {
           const response = await fetch('/api/country_chloropleth');
           const data = await response.json();
-          createMap(id, data.data);
+          createMap(id, data.data, updateCourses);
           console.log("Map created");
         } catch (error) {
           console.error('Error fetching map data:', error);
