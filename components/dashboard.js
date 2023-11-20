@@ -276,7 +276,7 @@ export default function Dashboard() {
             <div id="stats_page_card" className="w-11/12 p-6 rounded-lg self-center" style={{boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)"}}>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="">
+                    <div>
                       <h2 className="text-gray-900 text-title font-bold text-center">Number of courses/trainings offered per country</h2>
                       <div id="map" className="rounded-lg self-center">
                       </div>
