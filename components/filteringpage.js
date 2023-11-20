@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import { useCourses } from "./courses";
+import { useFilters } from "./filters";
 
 const createFilterMap = (id, updateCourses) => {
     // var selectedRegion = null;
@@ -51,8 +52,24 @@ const createFilterMap = (id, updateCourses) => {
   }
 
 export function Filters() {
+    const [isTypeOfCourseExpanded, setIsTypeOfCourseExpanded] = useState(false);
+    const [isThematicFocusExpanded, setIsThematicFocusExpanded] = useState(false);
+    const [isInstitutionsExpanded, setIsInstitutionsExpanded] = useState(false);
+
+    const toggleTypeOfCourse = () => {
+      setIsTypeOfCourseExpanded((prevExpanded) => !prevExpanded);
+    };
+
+    const toggleThematicFocus = () => {
+      setIsThematicFocusExpanded((prevExpanded) => !prevExpanded);
+    };
+
+    const toggleInstitutions = () => {
+      setIsInstitutionsExpanded((prevExpanded) => !prevExpanded);
+    };
 
     const {setCourses} = useCourses();
+    const {filters} = useFilters();
     const fetchCourses = async () => {
       try {
         const response = await fetch('/api/courses_data');
@@ -131,28 +148,45 @@ export function Filters() {
                         <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
                         <ul className="filters p-4 text-sm text-center md:text-left">
                             <li className="filter my-4">
-                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Type of Course</span>
-                                <ul className="expanded-filter ef-type">
+                                <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course</span>
+                                <ul className={`max-h-60 overflow-y-scroll ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
+                                  {
+                                    filters.typeofcourse && (
+                                      filters.typeofcourse.labels.map((label, index) => (
+                                        <li key={label}>
+                                          {label} ({filters.typeofcourse.data[index]})
+                                        </li>
+                                      ))
+                                    )
+                                  }
                                 </ul>
                             </li>
                             <li className="filter my-4">
-                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Teaching mechanism</span>
-                                <ul className="expanded-filter ef-teaching">
+                                <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus</span>
+                                <ul className={`max-h-60 overflow-y-scroll ${isThematicFocusExpanded ? "" : "hidden"}`}>
+                                  {
+                                    filters.thematic && (
+                                      filters.thematic.labels.map((label, index) => (
+                                        <li key={label}>
+                                          {label} ({filters.thematic.data[index]})
+                                        </li>
+                                      ))
+                                    )
+                                  }
                                 </ul>
                             </li>
                             <li className="filter my-4">
-                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Target Audience</span>
-                                <ul className="expanded-filter ef-target">
-                                </ul>
-                            </li>
-                            <li className="filter my-4">
-                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Thematic focus</span>
-                                <ul className="expanded-filter ef-thematic">
-                                </ul>
-                            </li>
-                            <li className="filter my-4">
-                                <span className="expand_filter_button text-base"><FontAwesomeIcon icon={faAngleDown} /> Institution offering the course</span>
-                                <ul className="expanded-filter ef-thematic">
+                                <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isInstitutionsExpanded? faAngleUp : faAngleDown} /> Institution offering the course</span>
+                                <ul className={`max-h-60 overflow-y-scroll ${isInstitutionsExpanded ? "" : "hidden"}`}>
+                                  {
+                                    filters.institutions && (
+                                      filters.institutions.labels.map((label, index) => (
+                                        <li key={label}>
+                                          {label} ({filters.institutions.data[index]})
+                                        </li>
+                                      ))
+                                    )
+                                  }
                                 </ul>
                             </li>
                         </ul>

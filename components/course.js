@@ -98,7 +98,7 @@ const Courses = () => {
           ref={(element) => {
             courseRefs[course.id] = element;
           }}
-          id={course.id} style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)",width: expandedCourses[course.id] ? "100%": '', transition: 'width 0.5s ease-in-out'}} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-8 relative mb-5" >
+          id={course.id} style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)",width: expandedCourses[course.id] ? "100%": '', transition: 'width 0.5s ease-in-out'}} className="course rounded-2xl w-full lg:w-5/12 p-6 pb-10 relative mb-5" >
           <div className="course-title-container">
             <h3>
               <strong>

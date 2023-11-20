@@ -4,6 +4,7 @@ import '../public/styles/apexcharts.css';
 import Footer from '@/components/footer';
 import Head from 'next/head';
 import { CoursesProvider } from '@/components/courses';
+import { FiltersProvider } from '@/components/filters';
 export const metadata = {
   title: 'Global Migration Health Training and Course Repository',
   description: 'This site is a repository of migration health related training and courses available globally, obtained from the MHADRI database',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
       </Head>
       <body >
         <CoursesProvider>
-          {children}
+          <FiltersProvider>
+            {children}
+          </FiltersProvider>
         </CoursesProvider>
         <Footer />
       </body>
