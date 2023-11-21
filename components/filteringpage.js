@@ -52,6 +52,7 @@ const createFilterMap = (id, updateCourses) => {
   }
 
 export function Filters() {
+    const {courses} = useCourses();
     const [isTypeOfCourseExpanded, setIsTypeOfCourseExpanded] = useState(false);
     const [isThematicFocusExpanded, setIsThematicFocusExpanded] = useState(false);
     const [isInstitutionsExpanded, setIsInstitutionsExpanded] = useState(false);
@@ -112,6 +113,58 @@ export function Filters() {
         }, 200);
       }
     };
+    const handleThematicFocusFilterClick = (label) => {
+      // Filter the courses based on the selected category and label
+      const filteredCourses = [];
+      const coursesArray = courses.forEach((course)=>{
+        if (course.thematic_focus === label) {
+          filteredCourses.push(course);
+        }
+      });
+      
+      // Update the courses state with the filtered data
+      setCourses(filteredCourses);
+  
+      // Scroll to the courses container
+      const coursesContainer = $('.courses');
+      setTimeout(() => {
+        coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    };
+    const handleTypeofcourseFilterClick = (label) => {
+      // Filter the courses based on the selected category and label
+      const filteredCourses = [];
+      const coursesArray = courses.forEach((course)=>{
+        if (course.type_of_course === label) {
+          filteredCourses.push(course);
+        }
+      });
+
+      setCourses(filteredCourses)
+  
+      // Scroll to the courses container
+      const coursesContainer = $('.courses');
+      setTimeout(() => {
+        coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    };
+    const handleInstitutionsFilterClick = (label) => {
+      // Filter the courses based on the selected category and label
+      const filteredCourses = [];
+      const coursesArray = courses.forEach((course)=>{
+        if (course.institution_name === label) {
+          filteredCourses.push(course);
+        }
+      });
+      // Update the courses state with the filtered data
+      setCourses(filteredCourses);
+  
+      // Scroll to the courses container
+      const coursesContainer = $('.courses');
+      setTimeout(() => {
+        coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    };
     useEffect(()=> {
 
         const updateCourses = (data) => {
@@ -154,9 +207,10 @@ export function Filters() {
                           <ul className={`max-h-60 overflow-y-auto ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
                             {filters.typeofcourse && (
                               Object.entries(filters.typeofcourse).map(([label, count]) => (
-                                <li key={label}>
-                                  {label} ({count})
-                                </li>
+                                
+                                <li key={label} className="cursor-pointer text-sm" onClick={() => handleTypeofcourseFilterClick(label)}>
+                                {label} ({count})
+                              </li>
                               ))
                             )}
                           </ul>
@@ -169,9 +223,10 @@ export function Filters() {
                           <ul className={`max-h-60 overflow-y-auto ${isThematicFocusExpanded ? "" : "hidden"}`}>
                             {filters.thematic && (
                               Object.entries(filters.thematic).map(([label, count]) => (
-                                <li key={label}>
-                                  {label} ({count})
-                                </li>
+                                
+                                <li key={label} className="cursor-pointer text-sm" onClick={() => handleThematicFocusFilterClick(label)}>
+                                {label} ({count})
+                              </li>
                               ))
                             )}
                           </ul>
@@ -184,9 +239,10 @@ export function Filters() {
                           <ul className={`max-h-60 overflow-y-auto ${isInstitutionsExpanded ? "" : "hidden"}`}>
                             {filters.institutions && (
                               Object.entries(filters.institutions).map(([label, count]) => (
-                                <li key={label}>
-                                  {label} ({count})
-                                </li>
+                                
+                                <li key={label} className="cursor-pointer text-sm" onClick={() => handleInstitutionsFilterClick(label)}>
+                                {label} ({count})
+                              </li>
                               ))
                             )}
                           </ul>
