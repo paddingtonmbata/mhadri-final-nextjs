@@ -147,48 +147,51 @@ export function Filters() {
                     <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
                         <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
                         <ul className="filters p-4 text-sm text-center md:text-left max-h-80 overflow-y-auto">
-                            <li className="filter my-4">
-                                <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course</span>
-                                <ul className={`max-h-60 overflow-y-auto ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
-                                  {
-                                    filters.typeofcourse && (
-                                      filters.typeofcourse.labels.map((label, index) => (
-                                        <li key={label}>
-                                          {label} ({filters.typeofcourse.data[index]})
-                                        </li>
-                                      ))
-                                    )
-                                  }
-                                </ul>
-                            </li>
-                            <li className="filter my-4">
-                                <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus</span>
-                                <ul className={`max-h-60 overflow-y-auto ${isThematicFocusExpanded ? "" : "hidden"}`}>
-                                  {
-                                    filters.thematic && (
-                                      filters.thematic.labels.map((label, index) => (
-                                        <li key={label}>
-                                          {label} ({filters.thematic.data[index]})
-                                        </li>
-                                      ))
-                                    )
-                                  }
-                                </ul>
-                            </li>
-                            <li className="filter my-4">
-                                <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer"><FontAwesomeIcon icon={isInstitutionsExpanded? faAngleUp : faAngleDown} /> Institution offering the course</span>
-                                <ul className={`max-h-60 overflow-y-auto ${isInstitutionsExpanded ? "" : "hidden"}`}>
-                                  {
-                                    filters.institutions && (
-                                      filters.institutions.labels.map((label, index) => (
-                                        <li key={label}>
-                                          {label} ({filters.institutions.data[index]})
-                                        </li>
-                                      ))
-                                    )
-                                  }
-                                </ul>
-                            </li>
+                        <li className="filter my-4">
+                          <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer">
+                            <FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course
+                          </span>
+                          <ul className={`max-h-60 overflow-y-auto ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
+                            {filters.typeofcourse && (
+                              Object.entries(filters.typeofcourse).map(([label, count]) => (
+                                <li key={label}>
+                                  {label} ({count})
+                                </li>
+                              ))
+                            )}
+                          </ul>
+                        </li>
+
+                        <li className="filter my-4">
+                          <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer">
+                            <FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus
+                          </span>
+                          <ul className={`max-h-60 overflow-y-auto ${isThematicFocusExpanded ? "" : "hidden"}`}>
+                            {filters.thematic && (
+                              Object.entries(filters.thematic).map(([label, count]) => (
+                                <li key={label}>
+                                  {label} ({count})
+                                </li>
+                              ))
+                            )}
+                          </ul>
+                        </li>
+
+                        <li className="filter my-4">
+                          <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer">
+                            <FontAwesomeIcon icon={isInstitutionsExpanded ? faAngleUp : faAngleDown} /> Institution offering the course
+                          </span>
+                          <ul className={`max-h-60 overflow-y-auto ${isInstitutionsExpanded ? "" : "hidden"}`}>
+                            {filters.institutions && (
+                              Object.entries(filters.institutions).map(([label, count]) => (
+                                <li key={label}>
+                                  {label} ({count})
+                                </li>
+                              ))
+                            )}
+                          </ul>
+                        </li>
+
                         </ul>
                     </div>
                     <form onSubmit={handleSubmit} id="search" className="bg-white rounded-xl py-3 px-2 flex flex-row justify-center">
