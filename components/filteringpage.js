@@ -190,7 +190,7 @@ export function Filters() {
                     <p className="text-base font-medium">The courses are categorized by type, instititution location, teaching <br/> mechanism, target audience, and thematic focus. The map reflects the countries<br/> where the courses and trainings are implemented.</p>
                     <br/><br/>
 
-                    <p className="text-base font-medium"><strong>To browse or search:</strong> simply use the filter options on the right-hand side or click on the map below. Alternatively, you can enter keyword/s in the searchbox.</p>
+                    <p className="text-base font-medium"><strong>To browse or search:</strong> simply use the filter options on the right-hand side (or below the map) or click on the map below. Alternatively, you can enter keyword/s in the searchbox</p>
                 </div>
                 <br/>
                 <br/>                
@@ -199,12 +199,12 @@ export function Filters() {
                 <div className="filterby-reset p-5 flex flex-col justify-start w-96 lg:mt-8 md:mt-10">
                     <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
                         <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
-                        <ul className="filters p-4 text-sm text-center md:text-left max-h-80 overflow-y-auto">
-                        <li className="filter my-4">
+                        <ul className="filters p-4 text-sm text-center md:text-left max-h-80 overflow-y-auto" style={{transition: 'height 0.5s ease'}}>
+                        <li className="filter my-4" >
                           <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer">
                             <FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course
                           </span>
-                          <ul className={`max-h-60 overflow-y-auto ${isTypeOfCourseExpanded ? "" : "hidden"}`}>
+                          <ul className={`overflow-y-auto ${isTypeOfCourseExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
                             {filters.typeofcourse && (
                               Object.entries(filters.typeofcourse).map(([label, count]) => (
                                 
@@ -220,7 +220,7 @@ export function Filters() {
                           <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer">
                             <FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus
                           </span>
-                          <ul className={`max-h-60 overflow-y-auto ${isThematicFocusExpanded ? "" : "hidden"}`}>
+                          <ul className={`overflow-y-auto ${isThematicFocusExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
                             {filters.thematic && (
                               Object.entries(filters.thematic).map(([label, count]) => (
                                 
@@ -236,7 +236,7 @@ export function Filters() {
                           <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer">
                             <FontAwesomeIcon icon={isInstitutionsExpanded ? faAngleUp : faAngleDown} /> Institution offering the course
                           </span>
-                          <ul className={`max-h-60 overflow-y-auto ${isInstitutionsExpanded ? "" : "hidden"}`}>
+                          <ul className={`overflow-y-auto ${isInstitutionsExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
                             {filters.institutions && (
                               Object.entries(filters.institutions).map(([label, count]) => (
                                 

@@ -78,15 +78,25 @@ export default function LandingPage() {
                 </ul>
             </div>
             <div className="landing-page-content w-full">
-                <div className="landing-page-content-header">
-                    <div className="landing-page-content-header-about py-5 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
+                <div className="landing-page-content-header self-center">
+                    <div className="landing-page-content-header-about py-5 lg:px-14 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
                         {/* <h3 className="text-pg-header font-bold">About the Repository</h3>
                         <hr className="w-16 m-4 bg-black font-extrabold border-2 text-black self-center"/> */}
-                        <p className="text-base font-medium" id="about">
-                            This is a searchable database of all migration and health related courses and trainings. Entries obtained from the MHADRI database
+                        <p className="text-base" id="about">
+                            This is a searchable database of all migration and health related courses and trainings. All entries are obtained from the MHADRI database
                         </p>
-                    </div>
-                    
+                        <br />
+                        <br />
+                        <p className="text-base">
+                            Below is the dashboard with a chloropleth map of the world displaying the number of courses and trainings related to migration and health from the entries in our database.
+                            <br />
+                            Clicking on the countrie will cause the piecharts to reflect the teaching mechanism and type of courses piechart filters for the clicked counntry
+                            <br />
+                            Clicking on the bargraph will render courses/trainings for the clicked country and clicking on the piechart will render courses with the clicked filter category
+                            <br />
+                            Please note that the  dashboard only provides general data of the whole database and more precise filters can be applied at the <a className="font-bold" href="#search-trainings">Search Trainings/Courses</a> section of this site.
+                        </p>
+                    </div>                    
                 </div>
             </div>
         </div>

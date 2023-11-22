@@ -2,12 +2,12 @@
 
 import ApexCharts from "apexcharts";
 import { useEffect } from "react";
+import ReactDOM from "react-dom/client";
 import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
 
 import { useCourses } from "./courses";
-
 function createBarGraph(data, updateCourses) {
   const categories = data.map(item => item.country_name);
   const courseCounts = data.map(item => item.course_count);
@@ -145,10 +145,18 @@ const createMap = (id, data, updateCourses) => {
           const courseResponse = await fetch(`/api/courses_by_country/${code}`);
           const data = await courseResponse.json();
           updateCourses(data.data.data);
-          // const coursesContainer = $('.courses');
-          // setTimeout(()=>{
-          //   coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
-          // }, 200); 
+          const typeofcourseRespone = await fetch(`api/type_of_course_counts_by_code/${code}`);
+          const typeofcourseData = await typeofcourseRespone.json()
+          const teachingmechanismRespone = await fetch(`api/type_of_course_counts_by_code/${code}`);
+          const teachingmechanismData = await teachingmechanismRespone.json()
+          const piechart1 = document.querySelector('#piechart1');
+          const piechart2 = document.querySelector('#piechart2');
+          if (piechart1) {
+            createPieChart("#piechart1", teachingmechanismData.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
+          }
+          if (piechart2) {
+            createPieChart("piechart2", typeofcourseData.data, 'donut', 200, '#0071A4', 'Type of Course', false);
+          }
         } catch (error) {
           console.error(`Error fetching course data: ${error}`);
         }
@@ -212,9 +220,12 @@ async function createPieChart (chartId, data, chartType, legend_height, pieColor
       await window[chartId].render();
   } else {
       // Update the existing chart instance
+      console.log("window: ", window[chartId]);
+      console.log(data.data)
       await window[chartId].updateSeries(data.data, true); // Update series data
       await window[chartId].updateOptions(options);
   }
+  console.log("Chart instance:", window[chartId]);
 }
 
 export default function Dashboard() {
@@ -246,7 +257,6 @@ export default function Dashboard() {
           const response = await fetch('/api/country_chloropleth');
           const data = await response.json();
           createMap(id, data.data, updateCourses);
-          console.log("Map created");
         } catch (error) {
           console.error('Error fetching map data:', error);
         }
@@ -257,8 +267,6 @@ export default function Dashboard() {
           const response = await fetch('/api/teaching_mechanism_counts');
           const data = await response.json();
           createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
-          console.log(pieOne, " created");
-          console.log(pieOne, data.data);
         } catch (error) {
           console.error('Error fetching pieOne data: ', error);
         }
@@ -269,8 +277,6 @@ export default function Dashboard() {
           const response = await fetch('/api/types_of_course_counts');
           const data = await response.json();
           createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
-          console.log(pieTwo, " created");
-          console.log(pieTwo, data.data);
         } catch (error) {
           console.error('Error fetching pieTwo data: ', error);
         }
