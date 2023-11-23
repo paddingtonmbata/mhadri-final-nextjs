@@ -92,7 +92,7 @@ export default function LandingPage() {
                             <br />
                             Clicking on the countrie will cause the piecharts to reflect the teaching mechanism and type of courses piechart filters for the clicked counntry
                             <br />
-                            Clicking on the bargraph will render courses/trainings for the clicked country and clicking on the piechart will render courses with the clicked filter category
+                            Clicking on the bargraph will render courses/trainings for the clicked country
                             <br />
                             Please note that the  dashboard only provides general data of the whole database and more precise filters can be applied at the <a className="font-bold" href="#search-trainings">Search Trainings/Courses</a> section of this site.
                         </p>

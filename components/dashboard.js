@@ -147,16 +147,17 @@ const createMap = (id, data, updateCourses) => {
           updateCourses(data.data.data);
           const typeofcourseRespone = await fetch(`api/type_of_course_counts_by_code/${code}`);
           const typeofcourseData = await typeofcourseRespone.json()
-          const teachingmechanismRespone = await fetch(`api/type_of_course_counts_by_code/${code}`);
+          const teachingmechanismRespone = await fetch(`api/teaching_mechanism_counts_by_code/${code}`);
           const teachingmechanismData = await teachingmechanismRespone.json()
           const piechart1 = document.querySelector('#piechart1');
           const piechart2 = document.querySelector('#piechart2');
           if (piechart1) {
-            createPieChart("#piechart1", teachingmechanismData.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
+            createPieChart("#piechart1", teachingmechanismData.data, 'donut', 200, '#727272', 'Teaching mechanisms', code);
           }
           if (piechart2) {
-            createPieChart("piechart2", typeofcourseData.data, 'donut', 200, '#0071A4', 'Type of Course', false);
+            createPieChart("#piechart2", typeofcourseData.data, 'donut', 200, '#0071A4', 'Type of Course', code);
           }
+          piechart1.scrollIntoView({behavior: "smooth"});
         } catch (error) {
           console.error(`Error fetching course data: ${error}`);
         }
@@ -210,7 +211,12 @@ async function createPieChart (chartId, data, chartType, legend_height, pieColor
       height: '369px',
       events: {
         // clicking on the piechart will render courses with that specific filter indicated by the piechart
-          dataPointSelection: async function (event, chartContext, config) { },
+          dataPointSelection: async function (event, chartContext, config) {
+            // const category = config.w.config.labels[config.dataPointIndex];
+            // const response = await fetch(`/api/courses_by_category_code/${code}/${category}`);
+            // const data = response.json();
+            // console.log(`Response from ${code}, ${category}: `, data.data);
+           },
       },
     },
   }
@@ -233,55 +239,59 @@ export default function Dashboard() {
   const updateCourses = (data) => {
     setCourses(data);
   }
+  const id = "#map";
+  const barId = "#bargraph";
+  const pieOne = "#piechart1";
+  const pieTwo = "#piechart2";
 
-  useEffect(() => {
-      const id = "#map";
-      const barId = "#bargraph";
-      const pieOne = "#piechart1";
-      const pieTwo = "#piechart2";
+  const fetchBarData = async () => {
+    try {
+      const response = await fetch('/api/country_course_count');
+      const data = await response.json();
+      console.log("bar data response: ", data.data);
+      createBarGraph(data.data, updateCourses);
+      console.log("Bar graph created");
+    } catch (error) {
+      console.log("Error fetching bar data: ", error);
+    }
+  }
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/country_chloropleth');
+      const data = await response.json();
+      createMap(id, data.data, updateCourses);
+    } catch (error) {
+      console.error('Error fetching map data:', error);
+    }
+  };
 
-      const fetchBarData = async () => {
-        try {
-          const response = await fetch('/api/country_course_count');
-          const data = await response.json();
-          console.log("bar data response: ", data.data);
-          createBarGraph(data.data, updateCourses);
-          console.log("Bar graph created");
-        } catch (error) {
-          console.log("Error fetching bar data: ", error);
-        }
-      }
-      
-      const fetchData = async () => {
-        try {
-          const response = await fetch('/api/country_chloropleth');
-          const data = await response.json();
-          createMap(id, data.data, updateCourses);
-        } catch (error) {
-          console.error('Error fetching map data:', error);
-        }
-      };
+  const fetchPieOneData = async () => {
+    try {
+      const response = await fetch('/api/teaching_mechanism_counts');
+      const data = await response.json();
+      createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
+    } catch (error) {
+      console.error('Error fetching pieOne data: ', error);
+    }
+  };
 
-      const fetchPieOneData = async () => {
-        try {
-          const response = await fetch('/api/teaching_mechanism_counts');
-          const data = await response.json();
-          createPieChart(pieOne, data.data, 'donut', 200, '#727272', 'Teaching mechanisms', false);
-        } catch (error) {
-          console.error('Error fetching pieOne data: ', error);
-        }
-      };
+  const fetchPieTwoData = async () => {
+    try {
+      const response = await fetch('/api/types_of_course_counts');
+      const data = await response.json();
+      createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
+    } catch (error) {
+      console.error('Error fetching pieTwo data: ', error);
+    }
+  };
 
-      const fetchPieTwoData = async () => {
-        try {
-          const response = await fetch('/api/types_of_course_counts');
-          const data = await response.json();
-          createPieChart(pieTwo, data.data, 'donut', 200, '#0071A4', 'Type of Course', false);
-        } catch (error) {
-          console.error('Error fetching pieTwo data: ', error);
-        }
-      };
-    
+  const resetStats = () => {
+    fetchPieOneData();
+    fetchPieTwoData();
+  }
+
+  useEffect(() => {    
       fetchData();
       fetchBarData();
       fetchPieOneData();
@@ -309,7 +319,7 @@ export default function Dashboard() {
                 </div>
                 
                 <div id="reset-filters" className="mt-8">
-                    <button id="reset_stats_page" className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150">
+                    <button id="reset_stats_page" onClick={resetStats} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150">
                         Reset stats
                     </button>
                 </div>

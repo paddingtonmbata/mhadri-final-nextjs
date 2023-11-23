@@ -53,9 +53,9 @@ const createFilterMap = (id, updateCourses) => {
 
 export function Filters() {
     const {courses} = useCourses();
-    const [isTypeOfCourseExpanded, setIsTypeOfCourseExpanded] = useState(false);
-    const [isThematicFocusExpanded, setIsThematicFocusExpanded] = useState(false);
-    const [isInstitutionsExpanded, setIsInstitutionsExpanded] = useState(false);
+    const [isTypeOfCourseExpanded, setIsTypeOfCourseExpanded] = useState(true);
+    const [isThematicFocusExpanded, setIsThematicFocusExpanded] = useState(true);
+    const [isInstitutionsExpanded, setIsInstitutionsExpanded] = useState(true);
 
     const toggleTypeOfCourse = () => {
       setIsTypeOfCourseExpanded((prevExpanded) => !prevExpanded);
