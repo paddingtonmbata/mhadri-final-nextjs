@@ -2,13 +2,17 @@
 import Image from "next/image";
 import { useState } from "react";
 import $ from "jquery";
-
 import { useCourses } from "./courses";
 
-const isMobile = window.innerWidth <= 1000;
+let isMobile = false;
+
+if (typeof window !== "undefined") {
+  // Check if window is defined (i.e., we are in the browser)
+  isMobile = window.innerWidth <= 1000;
+}
 
 export default function LandingPage() {
-    const {setCourses} =useCourses();
+    const {setCourses} = useCourses();
     const [searchTerm, setSearchTerm] = useState('');
     const handleSubmit = async (e) => {
       e.preventDefault();
