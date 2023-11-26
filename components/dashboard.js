@@ -253,7 +253,6 @@ async function createPieChart(
       },
     },
   };
-  if (typeof window !== "undefined") {
     if (typeof window[chartId] === "undefined") {
       // Create a new chart instance
       window[chartId] = new ApexCharts(
@@ -270,7 +269,6 @@ async function createPieChart(
     }
     console.log("Chart instance:", window[chartId]);
   }
-}
 
 export default function Dashboard() {
   const { setCourses } = useCourses();
