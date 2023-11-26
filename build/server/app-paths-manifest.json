@@ -1,0 +1,17 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/country_by_name/[country_name]/route": "app/api/country_by_name/[country_name]/route.js",
+  "/api/course_data_search/route": "app/api/course_data_search/route.js",
+  "/api/courses_by_category_code/[country_code]/[category]/route": "app/api/courses_by_category_code/[country_code]/[category]/route.js",
+  "/api/courses_by_country/[country_code]/route": "app/api/courses_by_country/[country_code]/route.js",
+  "/api/courses_data/route": "app/api/courses_data/route.js",
+  "/api/institution_counts/route": "app/api/institution_counts/route.js",
+  "/api/country_course_count/route": "app/api/country_course_count/route.js",
+  "/api/teaching_mechanism_counts/route": "app/api/teaching_mechanism_counts/route.js",
+  "/api/teaching_mechanism_counts_by_code/[country_code]/route": "app/api/teaching_mechanism_counts_by_code/[country_code]/route.js",
+  "/api/type_of_course_counts_by_code/[country_code]/route": "app/api/type_of_course_counts_by_code/[country_code]/route.js",
+  "/api/thematic_focus_counts/route": "app/api/thematic_focus_counts/route.js",
+  "/api/types_of_course_counts/route": "app/api/types_of_course_counts/route.js",
+  "/page": "app/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}
