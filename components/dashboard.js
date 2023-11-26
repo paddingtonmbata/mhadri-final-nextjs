@@ -275,6 +275,7 @@ export default function Dashboard() {
   const barId = "#bargraph";
   const pieOne = "#piechart1";
   const pieTwo = "#piechart2";
+  if (typeof window !== 'undefined') {
 
   const fetchBarData = async () => {
     try {
@@ -337,13 +338,14 @@ export default function Dashboard() {
   const resetStats = () => {
     fetchPieOneData();
     fetchPieTwoData();
-  };
-
+  };}
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     fetchData();
     fetchBarData();
     fetchPieOneData();
     fetchPieTwoData();
+    }
   }, []);
   return (
     <div
