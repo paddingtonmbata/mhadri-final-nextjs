@@ -294,9 +294,9 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/country_chloropleth");
+      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/country_chloropleth/");
       const data = await response.json();
-      createMap(id, data.data, updateCourses);
+      createMap(id, data, updateCourses);
     } catch (error) {
       console.error("Error fetching map data:", error);
     }
