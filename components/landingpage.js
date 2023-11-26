@@ -23,7 +23,7 @@ export default function LandingPage() {
   
         const data = await response.json();
         // Handle the fetched data as needed
-        setCourses(data.data);
+        setCourses(data);
         const coursesContainer = $('.courses');
         setTimeout(()=>{
           coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});

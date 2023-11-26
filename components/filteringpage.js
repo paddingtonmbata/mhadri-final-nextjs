@@ -75,7 +75,7 @@ export function Filters() {
       try {
         const response = await fetch('https://mhadri-final-database-af023718fb18.herokuapp.com/api/courses_data/');
         const data = await response.json();
-        setCourses(data.data.data);
+        setCourses(data.data);
         const coursesContainer = $('.courses');
         setTimeout(()=>{
           coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});
@@ -99,7 +99,7 @@ export function Filters() {
   
         const data = await response.json();
         // Handle the fetched data as needed
-        setCourses(data.data);
+        setCourses(data);
         const coursesContainer = $('.courses');
         setTimeout(()=>{
           coursesContainer.get(0).scrollIntoView({ behavior: 'smooth'});

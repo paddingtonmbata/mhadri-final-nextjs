@@ -281,8 +281,8 @@ export default function Dashboard() {
     try {
       const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/country_course_count/");
       const data = await response.json();
-      console.log("bar data response: ", data.data);
-      createBarGraph(data.data, updateCourses);
+      console.log("bar data response: ", data);
+      createBarGraph(data, updateCourses);
       console.log("Bar graph created");
     } catch (error) {
       console.log("Error fetching bar data: ", error);
@@ -305,7 +305,7 @@ export default function Dashboard() {
       const data = await response.json();
       createPieChart(
         pieOne,
-        data.data,
+        data,
         "donut",
         200,
         "#727272",
@@ -323,7 +323,7 @@ export default function Dashboard() {
       const data = await response.json();
       createPieChart(
         pieTwo,
-        data.data,
+        data,
         "donut",
         200,
         "#0071A4",
