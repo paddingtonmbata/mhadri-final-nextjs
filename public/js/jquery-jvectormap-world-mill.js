@@ -1,4 +1,5 @@
 import jQuery from "jquery";
+if (typeof window !== 'undefined') {
 jQuery.fn.vectorMap("addMap", "world_mill", {
   insets: [
     {
@@ -722,3 +723,4 @@ jQuery.fn.vectorMap("addMap", "world_mill", {
   projection: { type: "mill", centralMeridian: 11.5 },
   width: 900.0,
 });
+}
