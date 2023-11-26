@@ -6,11 +6,6 @@ import { useCourses } from "./courses";
 
 let isMobile = false;
 
-if (typeof window !== "undefined") {
-  // Check if window is defined (i.e., we are in the browser)
-  isMobile = window.innerWidth <= 1000;
-}
-
 export default function LandingPage() {
     const {setCourses} = useCourses();
     const [searchTerm, setSearchTerm] = useState('');
@@ -47,10 +42,9 @@ export default function LandingPage() {
             <div className="landing-page-header w-full">
                 {/*Explore search bar and logo*/}
                 <div className="bg-white py-8">
-                {isMobile ? ( <div className="mb-4 flex justify-center"><Image src="/mhadri_logo.png" alt="Logo"  width={50+20} height={49+20} min-width={100} /></div>) : null}
+                <div className="mb-4 flex justify-center"><Image src="/mhadri_logo.png" alt="Logo"  width={50+20} height={49+20} min-width={100} /></div>
                     <div className="justify-center mx-auto flex items-center max-h-13">
-                        {/** Logo */}
-                        {isMobile ? null: ( <div className="mr-4"><Image src="/mhadri_logo.png" alt="Logo" width={50+20} height={49+20} min-width={100}/></div>)}
+                        
 
                         {/**  Search Bar */}
                         <form className="flex flex-row" onSubmit={handleSubmit} id="landing-search">
