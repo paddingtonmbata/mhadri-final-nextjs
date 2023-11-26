@@ -37,7 +37,7 @@ function createBarGraph(data, updateCourses) {
             config.w.config.xaxis.categories[config.dataPointIndex];
           // Fetch and render courses for the clicked category
           const courseResponse = await fetch(
-            `/api/country_by_name/${country_name}`
+            `https://mhadri-final-database-af023718fb18.herokuapp.com/api/country_by_name/${country_name}/`
           );
           const countryCourses = await courseResponse.json();
           const coursesContainer = $(".courses");
@@ -147,15 +147,15 @@ const createMap = (id, data, updateCourses) => {
     },
     onRegionClick: async function (event, code) {
       try {
-        const courseResponse = await fetch(`/api/courses_by_country/${code}`);
+        const courseResponse = await fetch(`https://mhadri-final-database-af023718fb18.herokuapp.com/api/courses_by_country/${code}/`);
         const data = await courseResponse.json();
         updateCourses(data.data.data);
         const typeofcourseRespone = await fetch(
-          `api/type_of_course_counts_by_code/${code}`
+          `https://mhadri-final-database-af023718fb18.herokuapp.com/api/type_of_course_counts_by_code/${code}/`
         );
         const typeofcourseData = await typeofcourseRespone.json();
         const teachingmechanismRespone = await fetch(
-          `api/teaching_mechanism_counts_by_code/${code}`
+          `https://mhadri-final-database-af023718fb18.herokuapp.com/api/teaching_mechanism_counts_by_code/${code}/`
         );
         const teachingmechanismData = await teachingmechanismRespone.json();
         const piechart1 = document.querySelector("#piechart1");
@@ -279,7 +279,7 @@ export default function Dashboard() {
 
   const fetchBarData = async () => {
     try {
-      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/country_course_count");
+      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/country_course_count/");
       const data = await response.json();
       console.log("bar data response: ", data.data);
       createBarGraph(data.data, updateCourses);
@@ -301,7 +301,7 @@ export default function Dashboard() {
 
   const fetchPieOneData = async () => {
     try {
-      const response = await fetch("/api/teaching_mechanism_counts");
+      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/teaching_mechanism_counts/");
       const data = await response.json();
       createPieChart(
         pieOne,
@@ -319,7 +319,7 @@ export default function Dashboard() {
 
   const fetchPieTwoData = async () => {
     try {
-      const response = await fetch("/api/types_of_course_counts");
+      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/types_of_course_counts/");
       const data = await response.json();
       createPieChart(
         pieTwo,

@@ -13,7 +13,7 @@ export default function LandingPage() {
       e.preventDefault();
   
       try {
-        const apiUrl = `https://mhadri-final-database-af023718fb18.herokuapp.com/api/course_data_search?search=${searchTerm}`;
+        const apiUrl = `https://mhadri-final-database-af023718fb18.herokuapp.com/api/course_data_search/?search=${searchTerm}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {
