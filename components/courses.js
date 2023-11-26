@@ -12,7 +12,7 @@ export const CoursesProvider = ({ children }) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('/api/courses_data');
+        const response = await fetch('https://mhadri-final-database-af023718fb18.herokuapp.com/api/courses_data');
         const data = await response.json();
         setCourses(data.data.data);
       } catch (error) {

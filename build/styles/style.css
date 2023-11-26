@@ -1,0 +1,412 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body, button, input, select, textarea {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button, input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #CAF0F8;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.landing-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.landing-page .header {
+  width: 100%;
+  max-height: 15%;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  margin: 35px 0 15px 25px;
+}
+
+.landing-page-content {
+  width: 100%;
+  padding: 0 4%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.landing-page-content .row-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  max-height: 80%;
+}
+
+.map img {
+  width: 100%;
+  height: auto;
+}
+
+.landing-page-content .row-1 .text {
+  width: 35%;
+  padding-top: 15px;
+}
+
+.heading {
+  font-size: 44px;
+}
+
+.landing-page-content .row-1 .text p {
+  margin: 10px 0px 0px 5px;
+  font-size: 17px;
+}
+
+.landing-page-content .row-1 .text .heading {
+  font-size: 2.8rem;
+  color: #03045E;
+  text-shadow: -2px 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+#down_nav_arrow {
+  margin-top: 20px;
+  transition: all 200ms ease-in-out;
+  font-size: 28px;
+  color: #727272;
+  padding: 10px 30px;
+}
+
+#stats_page_wrapper {
+  width: 100vw;
+  padding: 5px;
+}
+
+#stats_page_card {
+  background-color: rgba(177, 224, 245, 0.5);
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px -3px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+#stats_page_card h2 {
+  font-size: 20px;
+}
+
+#stats_page_card .row-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#map {
+  width: 65%;
+}
+
+#map svg {
+  height: 100%;
+  width: 100%;
+}
+
+.map-text {
+  width: 30%;
+  justify-content: right;
+}
+
+.map-text h4 {
+  font-size: 20px;
+}
+
+#bargraph {
+  width: 35%;
+  height: auto;
+}
+
+#stats_page_card .row-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#piechart1 {
+  width: 450px;
+  height: auto;
+}
+
+#piechart2 {
+  width: 600px;
+  height: auto;
+}
+
+.courses {
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 50px 50px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.course {
+  padding: 20px;
+  padding-bottom: 30px;
+  border-radius: 17px;
+  width: 48%;
+  box-shadow: 0 0 20px -3px rgba(0, 0, 0, 0.25);
+  margin-top: 15px;
+  position: relative;
+  transition: all 250ms ease-out;
+}
+
+.course .row-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.course .row-1 .col-1 {
+  max-width: 70%;
+}
+
+.course-title-container h3 {
+  font-size: 28px;
+}
+
+.course-title-container p {
+  font-size: 28px;
+}
+
+.course .row-1 p, .course .row-2 p {
+  font-size: 22px;
+}
+
+.course .row-1, .course .row-2 {
+  margin: 10px 0;
+}
+
+.filtering_page {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.filtering_page .col-1 {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  height: 100%;
+}
+
+.filtering_page .col-2 {
+  width: 25%;
+}
+
+#filtermap {
+  width: 100%;
+  height: 500px;
+}
+
+#filtermap .jvectormap-container {
+  width: 100%;
+  height: 100%;
+}
+
+#filtermap svg {
+  height: 100%;
+  width: 100%;
+}
+
+.expand_filter {
+  transition: all 100ms ease;
+  font-weight: 300;
+}
+
+.filter-by {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(177, 224, 245, 0.5);
+  border-radius: 12px;
+  transition: all 200ms ease-in;
+}
+
+.filter-by h2 {
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  width: 100%;
+  background-color: #90E0EF;
+  padding: 20px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.filter {
+  margin: 25px 0px 25px 45px;
+}
+
+.expand_filter_button {
+  cursor: pointer;
+}
+
+.expanded-filter {
+  display: none;
+  margin: 20px 0px 0px 20px;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: rgba(177, 224, 245, 0.5);
+  margin-top: 25px;
+}
+
+.search, .filter-by {
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.search input {
+  width: 85%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-left: 10px;
+}
+
+.search button {
+  width: 15%;
+  color: #3290BB;
+  background-color: white;
+  font-size: 20px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 20px;
+}
+
+.expand-button {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom-right-radius: 17px;
+  border-top-left-radius: 8px;
+  color: white;
+  background-color: rgba(14, 120, 187, 0.6980392157);
+}
+
+.hidden {
+  display: none;
+}
+
+.expanded {
+  display: block;
+}
+
+.expandedCourse {
+  width: 100%;
+}
+
+.highlighted {
+  fill: rgb(253, 48, 116);
+}
+
+#reset_filter_button, #reset_stats_page {
+  padding: 15px 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: bolder;
+  background-color: #90E0EF;
+  margin-top: 15px;
+  border-radius: 8px;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+#reset_filter_button:hover, #reset_stats_page:hover {
+  color: #90E0EF;
+  background-color: white;
+}
+
+.footer-container {
+  background-color: #0077B6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0px;
+}
+
+.footer-container img {
+  width: auto;
+  height: 200px;
+}
+
+.footer-text h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.footer-text p {
+  color: #333333;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.expanded-filter li {
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */

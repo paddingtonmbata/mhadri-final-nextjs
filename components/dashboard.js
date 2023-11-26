@@ -279,7 +279,7 @@ export default function Dashboard() {
 
   const fetchBarData = async () => {
     try {
-      const response = await fetch("/api/country_course_count");
+      const response = await fetch("https://mhadri-final-database-af023718fb18.herokuapp.com/api/country_course_count");
       const data = await response.json();
       console.log("bar data response: ", data.data);
       createBarGraph(data.data, updateCourses);

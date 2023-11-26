@@ -37,7 +37,7 @@ const createFilterMap = (id, updateCourses) => {
       },
       onRegionClick: async function (event, code) {
         try {
-          const courseResponse = await fetch(`/api/courses_by_country/${code}`);
+          const courseResponse = await fetch(`https://mhadri-final-database-af023718fb18.herokuapp.com/api/courses_by_country/${code}`);
           const data = await courseResponse.json();
           updateCourses(data.data.data);
           const coursesContainer = $('.courses');
@@ -73,7 +73,7 @@ export function Filters() {
     const {filters} = useFilters();
     const fetchCourses = async () => {
       try {
-        const response = await fetch('/api/courses_data');
+        const response = await fetch('https://mhadri-final-database-af023718fb18.herokuapp.com/api/courses_data');
         const data = await response.json();
         setCourses(data.data.data);
         const coursesContainer = $('.courses');
@@ -89,7 +89,7 @@ export function Filters() {
       e.preventDefault();
   
       try {
-        const apiUrl = `/api/course_data_search?search=${searchTerm}`;
+        const apiUrl = `https://mhadri-final-database-af023718fb18.herokuapp.com/api/course_data_search?search=${searchTerm}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {
