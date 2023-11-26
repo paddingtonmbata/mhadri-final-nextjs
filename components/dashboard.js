@@ -253,22 +253,18 @@ async function createPieChart(
       },
     },
   };
-    if (typeof window[chartId] === "undefined") {
-      // Create a new chart instance
-      window[chartId] = new ApexCharts(
-        document.querySelector(chartId),
-        options
-      );
-      await window[chartId].render();
-    } else {
-      // Update the existing chart instance
-      console.log("window: ", window[chartId]);
-      console.log(data.data);
-      await window[chartId].updateSeries(data.data, true); // Update series data
-      await window[chartId].updateOptions(options);
-    }
-    console.log("Chart instance:", window[chartId]);
+  if (typeof window !== 'undefined' && typeof window[chartId] === 'undefined') {
+    // Create a new chart instance
+    window[chartId] = new ApexCharts(document.querySelector(chartId), options);
+    await window[chartId].render();
+  } else if (typeof window !== 'undefined') {
+    // Update the existing chart instance
+    console.log("window: ", window[chartId]);
+    console.log(data.data);
+    await window[chartId].updateSeries(data.data, true); // Update series data
+    await window[chartId].updateOptions(options);
   }
+}
 
 export default function Dashboard() {
   const { setCourses } = useCourses();
