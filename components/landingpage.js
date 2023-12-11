@@ -43,6 +43,7 @@ export default function LandingPage() {
                 {/*Explore search bar and logo*/}
                 <div className="bg-white py-8">
                 <div className="mb-4 flex justify-center"><Image src="/mhadri_logo.png" alt="Logo"  width={50+20} height={49+20} min-width={100} /></div>
+                <h1 className="text-pg-header font-bold">Global Migration Health Training and Course Repository</h1>
                     <div className="justify-center mx-auto flex items-center max-h-13">
                         
 
@@ -78,21 +79,21 @@ export default function LandingPage() {
             <div className="landing-page-content w-full">
                 <div className="landing-page-content-header self-center">
                     <div className="landing-page-content-header-about py-5 lg:px-14 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
-                        {/* <h3 className="text-pg-header font-bold">About the Repository</h3>
-                        <hr className="w-16 m-4 bg-black font-extrabold border-2 text-black self-center"/> */}
+                        <h3 className="text-pg-header font-bold">About the Repository</h3>
+                        <hr className="w-16 m-4 bg-black font-extrabold border-2 text-black self-center"/>
                         <p className="text-base" id="about">
-                            This is a searchable database of all migration and health related courses and trainings. All entries are obtained from the MHADRI database
+                            This is a searchable database of all migration and health-related courses and trainings. All entries are obtained from the Migration Health and Development Research Initiative (MHADRI) database.
                         </p>
                         <br />
                         <br />
                         <p className="text-base">
-                            Below is the dashboard with a chloropleth map of the world displaying the number of courses and trainings related to migration and health from the entries in our database.
+                            Below is the dashboard with a choropleth map of the world displaying the number of courses and trainings related to migration and health from the entries in our database.
                             <br />
-                            Clicking on the countrie will cause the piecharts to reflect the teaching mechanism and type of courses piechart filters for the clicked counntry
+                            Clicking on a country will cause the pie charts to reflect the teaching mechanism and type of courses. The pie chart filters for the clicked country.
                             <br />
-                            Clicking on the bargraph will render courses/trainings for the clicked country
+                            Clicking on the bar graph will render courses/trainings for the selected country.
                             <br />
-                            Please note that the  dashboard only provides general data of the whole database and more precise filters can be applied at the <a className="font-bold" href="#search-trainings">Search Trainings/Courses</a> section of this site.
+                            Clicking on the bar graph will render courses/trainings for the selected country. Please note that the dashboard only provides general data of the entire database and more precise filters can be applied at the <a className="font-bold" href="#search-trainings">Search Trainings/Courses</a> section of this site.
                         </p>
                     </div>                    
                 </div>

@@ -166,7 +166,7 @@ const createMap = (id, data, updateCourses) => {
             teachingmechanismData.data,
             "donut",
             200,
-            "#727272",
+            "#621302",
             "Teaching mechanisms",
             code
           );
@@ -233,10 +233,7 @@ async function createPieChart(
     },
     theme: {
       monochrome: {
-        enabled: true,
-        color: pieColor,
-        shadeTo: "dark",
-        shadeIntensity: 0.5,
+        enabled: false,
       },
     },
     chart: {
@@ -311,7 +308,7 @@ export default function Dashboard() {
         data.data,
         "donut",
         200,
-        "#727272",
+        "#621302",
         "Teaching mechanisms",
         false
       );

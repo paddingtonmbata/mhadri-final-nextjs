@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
     const iconColor = "white";
@@ -18,7 +18,7 @@ export default function Footer() {
                         <FontAwesomeIcon icon={faFacebook} style={{color: iconColor}}/>
                     </a>
                     <a href="https://twitter.com/mhadri_" className="mx-4">
-                        <FontAwesomeIcon icon={faTwitter} style={{color: iconColor}} />
+                        <FontAwesomeIcon icon={faXTwitter} style={{color: iconColor}} />
                     </a>
                 </div>
             </div>         

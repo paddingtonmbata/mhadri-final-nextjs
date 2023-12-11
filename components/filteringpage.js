@@ -187,10 +187,11 @@ export function Filters() {
                     <h2 className="text-pg-header font-bold" id="search-trainings">Search Trainings/Courses</h2>
                     <br/> <br/>
 
-                    <p className="text-base font-medium">The courses are categorized by type, instititution location, teaching <br/> mechanism, target audience, and thematic focus. The map reflects the countries<br/> where the courses and trainings are implemented.</p>
+                    <p className="text-base font-medium">The courses are categorized by type, institutional location, teaching mechanism, target audience, and thematic focus. The map reflects the countries where the courses and trainings are implemented.
+                    </p>
                     <br/><br/>
 
-                    <p className="text-base font-medium"><strong>To browse or search:</strong> simply use the filter options on the right-hand side (or below the map) or click on the map below. Alternatively, you can enter keyword/s in the searchbox</p>
+                    <p className="text-base font-medium"><strong>To browse or search:</strong> Simply use the filter options on the right-hand side (or below the map) or click on the map. Alternatively, you can enter keywords in the search box.</p>
                 </div>
                 <br/>
                 <br/>                
