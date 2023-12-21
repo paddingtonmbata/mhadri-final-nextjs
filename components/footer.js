@@ -1,10 +1,11 @@
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
     const iconColor = "white";
     return (
-        <footer className="w-full flex justify-center">
+        <footer className="w-full flex justify-center text-pg-title-m lg:text-pg-title">
             <div className="bg-black text-white flex flex-row justify-between py-10 w-10/12 self-center rounded-tl-lg rounded-tr-lg">
                 <div className="flex flex-col items-start ml-24">
                     <a href="http://mhadri.org">

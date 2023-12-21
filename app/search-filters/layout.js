@@ -1,4 +1,4 @@
-import './globals.css';
+import '../globals.css';
 import '@/public/styles/jquery-jvectormap-2.0.5.css';
 import '@/public/styles/apexcharts.css';
 import Footer from '@/components/footer';
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
             {children}
           </FiltersProvider>
         </CoursesProvider>
-        <Footer />
+        <Footer/>
       </body>
     </html>
   )

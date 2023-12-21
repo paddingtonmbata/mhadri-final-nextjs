@@ -342,32 +342,33 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchData();
-    fetchBarData();
+    // fetchBarData();
     fetchPieOneData();
     fetchPieTwoData();
   }, []);
   return (
     <div
       id="stats_page_wrapper"
-      className="p-4 w-full flex justify-center items-center"
+      className="p-2 lg:p-12 w-full flex justify-center items-center"
     >
       <div
         id="stats_page_card"
-        className="w-11/12 p-6 rounded-lg self-center"
+        className="w-11/12 p-2 lg:p-6 rounded-lg self-center"
         style={{ boxShadow: "0 0 20px -3px rgba(0, 0, 0, 0.25)" }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"> */}<div>
           <div>
             <h2 className="text-gray-900 text-title font-bold text-center">
               Number of courses/trainings offered per country
             </h2>
             <div id="map" className="rounded-lg self-center"></div>
+            <span data-tooltip="askdjalksjda sdjakdja s ajskdksa\n sdasdaljsdkasdsadjasd">How to use the map</span>
           </div>
 
-          <div
+          {/* <div
             id="bargraph"
             className="py-4 self-center flex justify-center w-full"
-          ></div>
+          ></div> */}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-6">
           <div id="piechart1" className="overflow-hidden"></div>

@@ -57,7 +57,7 @@ html {
   width: 100vw;
 }
 body {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: Helvetica, Calibri, sans-serif;
   color: black;
   width: 100vw;
   overflow-x: hidden;

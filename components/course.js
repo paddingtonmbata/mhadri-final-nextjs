@@ -67,6 +67,25 @@ const Courses = () => {
   const courseRefs = {};
 
   const [expandedCourses, setExpandedCourses] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 10; // Set the number of courses per page
+
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  const loadMore = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  
+  const loadLess = () => {
+    setCurrentPage(currentPage - 1);
+  };
+  
+  const showLoadMore = indexOfLastCourse < courses.length;
+  const showLoadLess = currentPage > 1;
+  
+
 
   const toggleExpanded = (courseId) => {
     setExpandedCourses((prevExpandedCourses) => ({
@@ -90,9 +109,9 @@ const Courses = () => {
         <p>{courses.length ? courses.length : "No"} course{courses.length > 1 ? "s": ""} found</p>
         {courses ? <button className="bg-blue-500 font-bold text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" onClick={handleDownload}>Download as XLSX</button>: <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5" >No Courses to download</button>}
       </div>
-    <div id="courses" className="courses w-full p-12 flex flex-wrap justify-evenly">
+    <div id="courses" className="courses w-full p-4 lg:p-12 flex flex-wrap justify-evenly">
       
-      {courses.map((course) => (
+      {currentCourses.map((course) => (
         <div 
           key={course.id} 
           ref={(element) => {
@@ -166,6 +185,9 @@ const Courses = () => {
           </button>
         </div>
       ))}
+    </div>
+    <div className="course-buttons flex justify-center">
+    {showLoadLess && (<button onClick={loadLess} className="bg-blue-500 font-bold text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5">Previous page </button>)}  {showLoadMore && (<button onClick={loadMore} className="bg-blue-500 font-bold text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 mx-5">Next page </button>)} 
     </div>
     </>
   );

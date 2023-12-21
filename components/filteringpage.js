@@ -113,58 +113,52 @@ export function Filters() {
         }, 200);
       }
     };
-    const handleThematicFocusFilterClick = (label) => {
-      // Filter the courses based on the selected category and label
-      const filteredCourses = [];
-      const coursesArray = courses.forEach((course)=>{
-        if (course.thematic_focus === label) {
-          filteredCourses.push(course);
-        }
-      });
-      
-      // Update the courses state with the filtered data
-      setCourses(filteredCourses);
-  
-      // Scroll to the courses container
-      const coursesContainer = $('.courses');
-      setTimeout(() => {
+    
+    const handleThematicFocusFilterClick = async (label) => {
+      try {
+        const filteredCourses = courses.filter((course) => course.thematic_focus === label);
+        setCourses(filteredCourses);
+    
+        // Wait for the state to update before scrolling
+        await new Promise((resolve) => setTimeout(resolve, 0));
+    
+        const coursesContainer = $('.courses');
         coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+      } catch (error) {
+        console.error('Error handling thematic focus filter click:', error);
+      }
     };
-    const handleTypeofcourseFilterClick = (label) => {
-      // Filter the courses based on the selected category and label
-      const filteredCourses = [];
-      const coursesArray = courses.forEach((course)=>{
-        if (course.type_of_course === label) {
-          filteredCourses.push(course);
-        }
-      });
-
-      setCourses(filteredCourses)
-  
-      // Scroll to the courses container
-      const coursesContainer = $('.courses');
-      setTimeout(() => {
+    
+    const handleTypeofcourseFilterClick = async (label) => {
+      try {
+        const filteredCourses = courses.filter((course) => course.type_of_course === label);
+        setCourses(filteredCourses);
+    
+        // Wait for the state to update before scrolling
+        await new Promise((resolve) => setTimeout(resolve, 0));
+    
+        const coursesContainer = $('.courses');
         coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+      } catch (error) {
+        console.error('Error handling type of course filter click:', error);
+      }
     };
-    const handleInstitutionsFilterClick = (label) => {
-      // Filter the courses based on the selected category and label
-      const filteredCourses = [];
-      const coursesArray = courses.forEach((course)=>{
-        if (course.institution_name === label) {
-          filteredCourses.push(course);
-        }
-      });
-      // Update the courses state with the filtered data
-      setCourses(filteredCourses);
-  
-      // Scroll to the courses container
-      const coursesContainer = $('.courses');
-      setTimeout(() => {
+    
+    const handleInstitutionsFilterClick = async (label) => {
+      try {
+        const filteredCourses = courses.filter((course) => course.institution_name === label);
+        setCourses(filteredCourses);
+    
+        // Wait for the state to update before scrolling
+        await new Promise((resolve) => setTimeout(resolve, 0));
+    
+        const coursesContainer = $('.courses');
         coursesContainer.get(0).scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+      } catch (error) {
+        console.error('Error handling institutions filter click:', error);
+      }
     };
+    
     useEffect(()=> {
 
         const updateCourses = (data) => {
@@ -183,15 +177,15 @@ export function Filters() {
     }, [setCourses]);
     return (
         <div className="filtering_page">
-            <div className="filtering-page-header py-5 px-10 w-screen flex flex-col justify-items-center justify-center text-center">
-                    <h2 className="text-pg-header font-bold" id="search-trainings">Search Trainings/Courses</h2>
+            <div className="filtering-page-header py-5 px-10 w-screen flex flex-col justify-items-center justify-center text-left">
+                    <h2 className="text-pg-header-m lg:text-pg-header font-bold" id="search-trainings">Search Trainings/Courses</h2>
                     <br/> <br/>
 
-                    <p className="text-base font-medium">The courses are categorized by type, institutional location, teaching mechanism, target audience, and thematic focus. The map reflects the countries where the courses and trainings are implemented.
+                    <p className="text-base-m lg:text-base font-medium">The courses are categorized by type, institutional location, and thematic focus. The map reflects the countries where the courses and trainings are implemented.
                     </p>
                     <br/><br/>
 
-                    <p className="text-base font-medium"><strong>To browse or search:</strong> Simply use the filter options on the right-hand side (or below the map) or click on the map. Alternatively, you can enter keywords in the search box.</p>
+                    <p className="text-base-m lg:text-base font-medium"><strong>To browse or search:</strong> Simply use the filter options on the right-hand side (or below the map) or click on the map. Alternatively, you can enter keywords in the search box.</p>
                 </div>
                 <br/>
                 <br/>                
@@ -199,10 +193,10 @@ export function Filters() {
                 <div id="filtermap" className=""></div>
                 <div className="filterby-reset p-5 flex flex-col justify-start w-96 lg:mt-8 md:mt-10">
                     <div className="filter-by rounded-lg font-bold mb-4 mt-10 w-full" >
-                        <h2 className="text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
+                        <h2 className="text-base-m lg:text-base font-bold text-center mix-blend-luminosity bg-gray-900 text-white rounded-lg py-2 px-5">Filter By</h2>
                         <ul className="filters p-4 text-sm text-center md:text-left max-h-80 overflow-y-auto" style={{transition: 'height 0.5s ease'}}>
                         <li className="filter my-4" >
-                          <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base cursor-pointer">
+                          <span onClick={toggleTypeOfCourse} className="expand_filter_button text-base-m lg:text-base cursor-pointer">
                             <FontAwesomeIcon icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown} /> Type of Course
                           </span>
                           <ul className={`overflow-y-auto ${isTypeOfCourseExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
@@ -218,7 +212,7 @@ export function Filters() {
                         </li>
 
                         <li className="filter my-4">
-                          <span onClick={toggleThematicFocus} className="expand_filter_button text-base cursor-pointer">
+                          <span onClick={toggleThematicFocus} className="expand_filter_button text-base-m lg:text-base cursor-pointer">
                             <FontAwesomeIcon icon={isThematicFocusExpanded ? faAngleUp : faAngleDown} /> Thematic focus
                           </span>
                           <ul className={`overflow-y-auto ${isThematicFocusExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
@@ -234,7 +228,7 @@ export function Filters() {
                         </li>
 
                         <li className="filter my-4">
-                          <span onClick={toggleInstitutions} className="expand_filter_button text-base cursor-pointer">
+                          <span onClick={toggleInstitutions} className="expand_filter_button text-base-m lg:text-base cursor-pointer">
                             <FontAwesomeIcon icon={isInstitutionsExpanded ? faAngleUp : faAngleDown} /> Institution offering the course
                           </span>
                           <ul className={`overflow-y-auto ${isInstitutionsExpanded ? "max-h-60" : "max-h-0"}`} style={{transition: 'max-height 0.6s ease-in'}}>
