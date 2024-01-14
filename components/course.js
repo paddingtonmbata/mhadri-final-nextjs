@@ -32,14 +32,13 @@ function generateExcelData(courses) {
     scope: course.scope,
     type_of_course: course.type_of_course,
     teaching_mechanism: course.teaching_mechanism,
-    target_population: course.target_population,
+    population_focus: course.population_focus,
     objective_of_training: course.objective_of_training,
     thematic_focus: course.thematic_focus,
-    teaching_approach: course.teaching_approach,
-    frequency_of_training: course.frequency_of_training,
-    funding_schemes: course.funding_schemes,
-    sustainibility_factors: course.sustainibility_factors,
-    key_challenges: course.key_challenges
+    methods_of_teaching: course.methods_of_teaching,
+    frequency_of_running_of_course: course.frequency_of_running_of_course,
+    funding_availability: course.funding_availability,
+    additional_details: course.additional_details,
   }));
 }
 
@@ -67,8 +66,8 @@ const Courses = () => {
   const courseRefs = {};
 
   const [expandedCourses, setExpandedCourses] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
-  const coursesPerPage = 10; // Set the number of courses per page
+  const {currentPage, setCurrentPage} = useCourses();
+  const coursesPerPage = 6; // Set the number of courses per page
 
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
@@ -84,8 +83,6 @@ const Courses = () => {
   
   const showLoadMore = indexOfLastCourse < courses.length;
   const showLoadLess = currentPage > 1;
-  
-
 
   const toggleExpanded = (courseId) => {
     setExpandedCourses((prevExpandedCourses) => ({
@@ -140,7 +137,7 @@ const Courses = () => {
               </p>
               <div className={`${expandedCourses[course.id] ? '' : 'hidden'}`}>
                 <p>
-                    <strong> Target population: </strong> {course.target_population}
+                    <strong> Population focus: </strong> {course.population_focus}
                 </p>
                 <p>
                     <strong> Objective of training: </strong>{" "}
@@ -153,32 +150,28 @@ const Courses = () => {
             </div>
             <div className={`col-2 ${expandedCourses[course.id] ? '' : 'hidden'}`}>
               <p>
-                <strong> Teaching approach: </strong> {course.teaching_approach}
+                <strong> Methods of teaching: </strong> {course.methods_of_teaching}
               </p>
               <p>
-                <strong> Frequency of Training: </strong>
-                {course.frequency_of_training}
+                <strong> Frequency of running of course/training: </strong>
+                {course.frequency_of_running_of_course}
               </p>
               <p>
-                <strong> Funding Schemes: </strong> {course.funding_schemes}
+                <strong> Funding Availability: </strong> {course.funding_availability}
               </p>
               <p>
-                <strong> Sustainibility factors: </strong>
-                {course.sustainibility_factors}
-              </p>
-              <p>
-                <strong> Key Challenges: </strong>
-                {course.key_challenges}
+                <strong> Additional Details: </strong>
+                {course.additional_details}
               </p>
             </div>
           </div>
-          <div className="row-2">
+          <div className={`${expandedCourses[course.id] ? 'row-2' : 'hidden'}`}>
             <p>
               <strong> Scope: </strong>{course.scope}
             </p>
           </div>
           <div className="footnotes p-2 absolute bottom-1 left-1">
-            <p className="created text-sm text-gray-500">{toDate(course.created_at)}</p>
+            <p className="created text-sm text-gray-500">Last updated: {toDate(course.created_at)}</p>
           </div>
           <button id="expand-button" onClick={() => toggleExpanded(course.id)} className="bg-blue-500 font-bold text-white px-2 py-2 rounded-2xl hover:text-blue-600 hover:bg-white focus:outline-none focus:shadow-outline-blue active:bg-white active:text-blue-500 transition duration-150 absolute bottom-1 right-1 text-sm">
           {expandedCourses[course.id] ? 'Read less' : 'Read more'}

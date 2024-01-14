@@ -7,7 +7,10 @@ import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
 
+import { Tooltip } from "react-tooltip";
+
 import { useCourses } from "./courses";
+
 function createBarGraph(data, updateCourses) {
   const categories = data.map((item) => item.country_name);
   const courseCounts = data.map((item) => item.course_count);
@@ -128,7 +131,7 @@ const createMap = (id, data, updateCourses) => {
       regions: [
         {
           values: mapData,
-          scale: ["#C8EEFF", "#0071A4"],
+          scale: ["#e7cdfe", "#5653FE"],
           normalizeFunction: "polynomial",
           min: 0,
           max: Math.max(...Object.values(mapData)),
@@ -232,6 +235,7 @@ async function createPieChart(
       },
     },
     theme: {
+      palette: "palette10",
       monochrome: {
         enabled: false,
       },
@@ -339,6 +343,9 @@ export default function Dashboard() {
     fetchPieOneData();
     fetchPieTwoData();
   };
+  const showAlert = () => {
+    alert("Clicking on a country will cause the pie charts to reflect the teaching mechanism and type of courses. The pie chart filters for the clicked country.\n\nClicking on the bar graph will render courses/trainings for the selected country.\n Please note that the dashboard only provides general data of the entire database and more precise filters can be applied at the Search Trainings/Courses section of this site.");
+  }
 
   useEffect(() => {
     fetchData();
@@ -362,7 +369,12 @@ export default function Dashboard() {
               Number of courses/trainings offered per country
             </h2>
             <div id="map" className="rounded-lg self-center"></div>
-            <span data-tooltip="askdjalksjda sdjakdja s ajskdksa\n sdasdaljsdkasdsadjasd">How to use the map</span>
+            <button
+              className="cursor-pointer bg-blue-500 text-white text-sm px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 max-w-full"
+              onClick={showAlert}
+            >
+              How to use the map
+            </button>
           </div>
 
           {/* <div
@@ -379,7 +391,7 @@ export default function Dashboard() {
           <button
             id="reset_stats_page"
             onClick={resetStats}
-            className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150"
+            className="bg-blue-500 text-white px-4 py-2 text-sm rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150"
           >
             Reset stats
           </button>

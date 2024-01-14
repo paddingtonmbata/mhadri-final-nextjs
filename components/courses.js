@@ -8,6 +8,8 @@ const CoursesContext = React.createContext();
 // Create a CoursesProvider component to wrap your app and manage the courses state
 export const CoursesProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); // Add currentPage state here
+
   // Fetch all courses initially
   useEffect(() => {
     const fetchCourses = async () => {
@@ -24,11 +26,12 @@ export const CoursesProvider = ({ children }) => {
   }, []);
 
   return (
-    <CoursesContext.Provider value={{ courses, setCourses }}>
+    <CoursesContext.Provider value={{ courses, setCourses, currentPage, setCurrentPage }}>
       {children}
     </CoursesContext.Provider>
   );
 };
+
 // Create a useCourses hook to access the courses context
 export const useCourses = () => {
   return useContext(CoursesContext);

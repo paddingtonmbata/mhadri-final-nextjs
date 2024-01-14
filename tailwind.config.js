@@ -13,10 +13,10 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontSize: {
-        'pg-header':'2.4rem',
-        'pg-title':'1.9rem',
-        'base':'1.5rem',
-        'pg-header-m':'1.9rem',
+        'pg-header':'2.1rem',
+        'pg-title':'1.8rem',
+        'base':'1.2rem',
+        'pg-header-m':'1.6rem',
         'pg-title-m':'1.4rem',
         'base-m':'1rem'
       },

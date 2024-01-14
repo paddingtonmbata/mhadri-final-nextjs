@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
             {children}
           </FiltersProvider>
         </CoursesProvider>
-        <Footer />
+        <Footer/>
       </body>
     </html>
   )

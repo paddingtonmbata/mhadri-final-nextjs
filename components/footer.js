@@ -3,18 +3,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
-    const iconColor = "white";
+    const iconColor = "black";
     return (
-        <footer className="w-full flex justify-center text-pg-title-m lg:text-pg-title">
-            <div className="bg-black text-white flex flex-row justify-between py-10 w-10/12 self-center rounded-tl-lg rounded-tr-lg">
-                <div className="flex flex-col items-start ml-24">
+        <footer className="w-full mt-6 leading-7 lg:leading-10">
+            <div className="about px-8 lg:px-60 py-8 bg-gray-100 flex flex-col lg:flex-row lg:justify-between">
+                <div className="content">
+                    <h3 className="text-pg-title-m lg:text-pg-title font-bold mb-2">About</h3>
+                    <p className="text-base-m lg:text-base">
+                        (MHADRI) aims to advance evidence-informed global<br/> migration health policies and practices that will<br/> improve the health and wellbeing of people and<br/> communities affected by migration.
+                    </p>
+                </div>
+                <div className="links">
+                    <h3 className="text-pg-title-m lg:text-pg-title font-bold mb-2">About MHADRI</h3>
+                    <ul className="text-base-m lg:text-base font-bold">
+                        <li><a href="https://mhadri.org/about/" target="_blank" rel="noopener noreferrer">About</a></li>
+                        <li><a href="https://mhadri.org/about/steering-committee/" target="_blank" rel="noopener noreferrer">Steering Committee</a></li>
+                        <li><a href="https://mhadri.org/about/early-career-researchers/" target="_blank" rel="noopener noreferrer">Early Career Researchers</a></li>
+                        <li><a href="https://mhadri.org/2021/01/27/get-involved-reviewing-publications-for-the-iom-migration-health-evidence-portal-for-covid-19/" target="_blank" rel="noopener noreferrer">Get involved!</a></li>
+                        <li><a href="https://mhadri.org/contact/" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div className="bg-white text-black flex flex-row justify-between w-full  rounded-tl-lg rounded-tr-lg px-8 lg:px-60 py-8">
+                <div className="flex flex-col items-start">
                     <a href="http://mhadri.org">
                     <span>&copy; {new Date().getFullYear()} MHADRI </span>
                     </a>                    
                 </div>
 
                 {/* <!-- Social Icons --> */}
-                <div className="flex flex-row items-right mr-24" id="contact">
+                <div className="flex flex-row items-right" id="contact">
                     <a href="https://www.facebook.com/MigHealthDev/" className="mx-4">
                         <FontAwesomeIcon icon={faFacebook} style={{color: iconColor}}/>
                     </a>
