@@ -1,16 +1,16 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faXTwitter } from "@fortawesome/free-brands-svg-icons";
-
+import Image from "next/image";
 export default function Footer() {
     const iconColor = "black";
     return (
         <footer className="w-full mt-6 leading-7 lg:leading-10">
             <div className="about px-8 lg:px-60 py-8 bg-gray-100 flex flex-col lg:flex-row lg:justify-between">
                 <div className="content">
-                    <h3 className="text-pg-title-m lg:text-pg-title font-bold mb-2">About</h3>
+                    <Image src="/footer_logo.png" height={50} width={257}/>
                     <p className="text-base-m lg:text-base">
-                        (MHADRI) aims to advance evidence-informed global<br/> migration health policies and practices that will<br/> improve the health and wellbeing of people and<br/> communities affected by migration.
+                        MHADRI aims to advance evidence-informed global<br/> migration health policies and practices that will<br/> improve the health and wellbeing of people and<br/> communities affected by migration.
                     </p>
                 </div>
                 <div className="links">

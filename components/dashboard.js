@@ -2,102 +2,11 @@
 
 import ApexCharts from "apexcharts";
 import { useEffect } from "react";
-import ReactDOM from "react-dom/client";
 import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
 import "../public/js/jquery-jvectormap-world-mill";
 
-import { Tooltip } from "react-tooltip";
-
 import { useCourses } from "./courses";
-
-function createBarGraph(data, updateCourses) {
-  const categories = data.map((item) => item.country_name);
-  const courseCounts = data.map((item) => item.course_count);
-
-  const options = {
-    series: [
-      {
-        data: courseCounts,
-      },
-    ],
-    title: {
-      text: "Number of institution by location",
-      align: "center",
-      style: {
-        fontSize: "16px",
-      },
-    },
-    chart: {
-      type: "bar",
-      height: 500,
-      width: "100%",
-      fontFamily: "Heebo, monospace",
-      events: {
-        // when each point of the bargraoh is clicked on it renders courses belonging to the clicked country on the bargraph
-        dataPointSelection: async function (event, chartContext, config) {
-          const country_name =
-            config.w.config.xaxis.categories[config.dataPointIndex];
-          // Fetch and render courses for the clicked category
-          const courseResponse = await fetch(
-            `/api/country_by_name/${country_name}`
-          );
-          const countryCourses = await courseResponse.json();
-          const coursesContainer = $(".courses");
-          updateCourses(countryCourses.data);
-          setTimeout(() => {
-            coursesContainer.get(0).scrollIntoView({ behavior: "smooth" });
-          }, 200);
-        },
-      },
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: 4,
-        horizontal: true,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: categories,
-    },
-    grid: {
-      show: true,
-      yaxis: {
-        lines: {
-          show: false,
-        },
-      },
-      xaxis: {
-        lines: {
-          show: true,
-        },
-      },
-      columns: {
-        opacity: 0.5,
-      },
-    },
-    tooltip: {
-      followCursor: true,
-      x: {
-        show: false,
-      },
-      marker: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: (seriesName) => "",
-        },
-      },
-    },
-  };
-
-  const chart = new ApexCharts(document.querySelector("#bargraph"), options);
-  chart.render();
-}
 
 const createMap = (id, data, updateCourses) => {
   let mapData = {};
@@ -277,23 +186,11 @@ export default function Dashboard() {
     setCourses(data);
   };
   const id = "#map";
-  const barId = "#bargraph";
   const pieOne = "#piechart1";
   const pieTwo = "#piechart2";
 
-  const fetchBarData = async () => {
-    try {
-      const response = await fetch("/api/country_course_count");
-      const data = await response.json();
-      console.log("bar data response: ", data.data);
-      createBarGraph(data.data, updateCourses);
-      console.log("Bar graph created");
-    } catch (error) {
-      console.log("Error fetching bar data: ", error);
-    }
-  };
-
   const fetchData = async () => {
+    console.log("Running map fetch");
     try {
       const response = await fetch("/api/country_chloropleth");
       const data = await response.json();
@@ -304,6 +201,7 @@ export default function Dashboard() {
   };
 
   const fetchPieOneData = async () => {
+    console.log("running pie one fetch")
     try {
       const response = await fetch("/api/teaching_mechanism_counts");
       const data = await response.json();
@@ -322,6 +220,7 @@ export default function Dashboard() {
   };
 
   const fetchPieTwoData = async () => {
+    console.log("running pie two fetch")
     try {
       const response = await fetch("/api/types_of_course_counts");
       const data = await response.json();
@@ -344,12 +243,13 @@ export default function Dashboard() {
     fetchPieTwoData();
   };
   const showAlert = () => {
-    alert("Clicking on a country will cause the pie charts to reflect the teaching mechanism and type of courses. The pie chart filters for the clicked country.\n\nClicking on the bar graph will render courses/trainings for the selected country.\n Please note that the dashboard only provides general data of the entire database and more precise filters can be applied at the Search Trainings/Courses section of this site.");
+    alert("Clicking on a country will cause the pie charts to reflect the teaching mechanism and type of courses. The pie chart filters for the clicked country.\n\nPlease note that the dashboard only provides general data of the entire database and more precise filters can be applied at the Search Trainings/Courses section of this site.");
   }
 
   useEffect(() => {
+    window[pieOne] = undefined;
+    window[pieTwo] = undefined;
     fetchData();
-    // fetchBarData();
     fetchPieOneData();
     fetchPieTwoData();
   }, []);
@@ -366,7 +266,7 @@ export default function Dashboard() {
         {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"> */}<div>
           <div>
             <h2 className="text-gray-900 text-title font-bold text-center">
-              Number of courses/trainings offered per country
+              Number of trainings/courses per country
             </h2>
             <div id="map" className="rounded-lg self-center"></div>
             <button

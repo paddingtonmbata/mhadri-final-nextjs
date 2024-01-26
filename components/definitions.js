@@ -39,8 +39,7 @@ export default function Definitions() {
           </tr>
           <tr>
             <th>Methods of teaching:</th>
-            <td>The pedagogical methods employed in the course, which could range from "Participatory" and "Case Study-Based" to "Didactic" or "Interactive."
-Frequency of Training	Indicates how often the course or training is offered, such as "Annually," "Bi-Annually," or "On-demand."</td>
+            <td>The pedagogical methods employed in the course, which could range from "Participatory" and "Case Study-Based" to "Didactic" or "Interactive.</td>
           </tr>
           <tr>
             <th>Frequency of Training:</th>

@@ -3,12 +3,10 @@ import { useCourses } from "./courses";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
-import $ from "jquery";
-
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver';
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 function toDate(date) {
   const formattedDate = date.replace('Z', '');
@@ -26,35 +24,61 @@ function toDate(date) {
 
 function generateExcelData(courses) {
   return courses.map(course => ({
-    source: course.source,
-    institution_name: course.institution_name,
-    institution_location: course.institution_location,
-    scope: course.scope,
-    type_of_course: course.type_of_course,
-    teaching_mechanism: course.teaching_mechanism,
-    population_focus: course.population_focus,
-    objective_of_training: course.objective_of_training,
-    thematic_focus: course.thematic_focus,
-    methods_of_teaching: course.methods_of_teaching,
-    frequency_of_running_of_course: course.frequency_of_running_of_course,
-    funding_availability: course.funding_availability,
-    additional_details: course.additional_details,
+    "Source": course.source,
+    "Institution name": course.institution_name,
+    "Institution location": course.institution_location,
+    "Scope": course.scope,
+    "Type of course": course.type_of_course,
+    "Teaching mechanism": course.teaching_mechanism,
+    "Population focus": course.population_focus,
+    "Objective of training": course.objective_of_training,
+    "Thematic focus": course.thematic_focus,
+    "Methods of teaching": course.methods_of_teaching,
+    "Frequency of running of course": course.frequency_of_running_of_course,
+    "Funding availability": course.funding_availability,
+    "Additional details": course.additional_details,
   }));
 }
 
 function convertToXLSX(data) {
   try {
     const ws = XLSX.utils.json_to_sheet(data);
-    console.log("ws: ", ws);
+
+    const colWidths = ws['!cols'] || [];
+    const range = XLSX.utils.decode_range(ws['!ref']);
+
+    for (let colIndex = range.s.c; colIndex <= range.e.c; colIndex++) {
+      let maxWidth = 0;
+
+      for (let rowIndex = range.s.r; rowIndex <= range.e.r; rowIndex++) {
+        const cellRef = XLSX.utils.encode_cell({ r: rowIndex, c: colIndex });
+        const cellValue = ws[cellRef] ? ws[cellRef].v : ''; // handle empty cells
+
+        const cellWidth = (cellValue.toString().length + 0.5) * 6; // adjust the multiplier based on your needs
+
+        if (cellWidth > maxWidth) {
+          maxWidth = cellWidth;
+        }
+      }
+
+      if (!colWidths[colIndex] || colWidths[colIndex].wpx < maxWidth) {
+        colWidths[colIndex] = { wpx: maxWidth };
+      }
+    }
+
+    ws['!cols'] = colWidths;
+
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    console.log("excel buffer: ", excelBuffer);
     return excelBuffer;
   } catch (error) {
-    console.log("Error downloading xslx", error);
+    console.log("Error downloading xlsx", error);
   }
 }
+
+
+
 
 function downloadExcelFile(buffer, fileName) {
   const data = new Blob([buffer], { type: 'application/octet-stream' });

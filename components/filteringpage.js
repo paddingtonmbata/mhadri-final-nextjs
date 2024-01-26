@@ -1,6 +1,5 @@
 "use client";
 
-import ApexCharts from "apexcharts";
 import { useEffect, useState } from "react";
 import $ from "jquery";
 import "../public/js/jquery-jvectormap-2.0.5.min";
@@ -232,7 +231,7 @@ export function Filters() {
                   <FontAwesomeIcon
                     icon={isTypeOfCourseExpanded ? faAngleUp : faAngleDown}
                   />{" "}
-                  Type of Course
+                  Type of course
                 </span>
                 <ul
                   className={`overflow-y-auto ${

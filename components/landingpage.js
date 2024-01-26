@@ -54,7 +54,8 @@ export default function LandingPage({ isSearchPage }) {
         {/*Explore search bar and logo*/}
         <div className="bg-white py-2">
           <div className="mb-4 flex justify-center">
-            <Logo isMobile={isMobile}/>           
+            <a href="https://mhadri.org"><Logo isMobile={isMobile}/></a>       
+                 
           </div>
           <h1 className="text-pg-header-m lg:text-pg-header font-bold text-center">
             Global Migration Health Training and Course Repository
@@ -83,7 +84,7 @@ export default function LandingPage({ isSearchPage }) {
             </Link>
           </li>
           <li className="nav-item mx-1 lg:mx-5 border-b-2 border-transparent hover:transition duration-250 text-base-m lg:text-base font-bold text-black px-4 bg-white rounded-lg hover:bg-white hover:px-6 hover:rounded-lg ease-in py-1 hover:font-bold transition-all">
-            <a href="#contact">Contact</a>
+            <a href="https://mhadri.org/contact/" target="_blank">Contact</a>
           </li>
         </ul>
       </div>
@@ -101,28 +102,20 @@ export default function LandingPage({ isSearchPage }) {
                 The repository is a searchable database of migration and
                 health-related courses and trainings across the globe. The data
                 is drawn from a live database built by the Migration Health and
-                Development Research initiative (MHADRI) through which course
-                and training information is collated and updated.
+                Development Research initiative (MHADRI) through which training and course information is collated and updated.
               </p>
               <br />
               <p className="text-base-m lg:text-base">                
-                The repository provides a <a data-tooltip-id="tool" data-tooltip-content="While not all courses and trainings are captured here the
+              The repository provides a comprehensive database of <a data-tooltip-id="tool" data-tooltip-content="While not all courses and trainings are captured here the
                 repository provides a comprehensive database – you can find out
-                what courses are available and where" data-tooltip-place="top">comprehensive database</a><Tooltip id="tool"/> - and using the{" "}
-                <Link
-                  className="font-bold text-purple-800"
-                  href="/search-filters"
-                >
-                  search function and filters
-                </Link>{" "}
-                you can learn more about types of courses, teaching format, target
-                audience, funding etc.
+                what courses are available and where" data-tooltip-place="top"><Link
+                className="font-bold text-purple-800"
+                href="/search-filters"
+              >
+                trainings/courses
+              </Link>{" "}</a><Tooltip id="tool"/>
+                Use the search function and filters to learn more about types of courses, teaching format, target audience, funding etc.”
                 <br />
-                {/* Clicking on a country will cause the pie charts to reflect the teaching mechanism and type of courses. The pie chart filters for the clicked country.
-                            <br />
-                            Clicking on the bar graph will render courses/trainings for the selected country.
-                            <br />
-                            Clicking on the bar graph will render courses/trainings for the selected country. Please note that the dashboard only provides general data of the entire database and more precise filters can be applied at the <a className="font-bold" href="#search-trainings">Search Trainings/Courses</a> section of this site. */}
               </p>
             </div>
           </div>
