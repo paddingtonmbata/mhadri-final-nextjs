@@ -114,7 +114,7 @@ export default function LandingPage({ isSearchPage }) {
               >
                 trainings/courses
               </Link>{" "}</a><Tooltip id="tool"/>
-                Use the search function and filters to learn more about types of courses, teaching format, target audience, funding etc.”
+                Use the search function and filters to learn more about types of courses, teaching format, target audience, funding etc.
                 <br />
               </p>
             </div>

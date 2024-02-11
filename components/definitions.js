@@ -39,7 +39,7 @@ export default function Definitions() {
           </tr>
           <tr>
             <th>Methods of teaching:</th>
-            <td>The pedagogical methods employed in the course, which could range from "Participatory" and "Case Study-Based" to "Didactic" or "Interactive.</td>
+            <td>The pedagogical methods employed in the course, which could range from "Participatory" and "Case Study-Based" to "Didactic" or "Interactive."</td>
           </tr>
           <tr>
             <th>Frequency of Training:</th>
@@ -47,7 +47,7 @@ export default function Definitions() {
           </tr>
           <tr>
             <th>Funding/Grants availabliliy:</th>
-            <td>The availabilty of funding schemes offered for the particular course or training program</td>
+            <td>Sources or mechanisms through which the course or training receives financial support. Could be internal (from the hosting Institution) or external grants.</td>
           </tr>
         </tbody>
       </table>
